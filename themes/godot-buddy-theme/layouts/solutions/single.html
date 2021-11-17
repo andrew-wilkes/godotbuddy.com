@@ -1,0 +1,27 @@
+{{ partial "header.html" . }}
+
+<div class="content">
+    {{ .Content }}
+
+    {{- if not .IsHome }}
+
+    <p><a href="https://talk.gdscript.com/forum-5.html">Comments Forum</a></p>
+
+<div class="support">
+    &#128578; <a href="/support/">Support my work</a>
+</div>
+{{ end -}}
+
+    <h2>More solutions</h2>
+
+    <ul>
+    {{- $url := .RelPermalink }}
+    {{- range (where .Site.RegularPages.ByWeight "Section" "solutions") }}
+        {{- if (ne .RelPermalink $url) -}}
+        <li><a href="{{.Permalink}}">{{.Title}}</a></li>
+        {{- end }}
+    {{- end }}
+    </ul>
+</div>
+
+{{ partial "footer.html" . }}

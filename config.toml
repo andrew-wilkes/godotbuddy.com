@@ -1,3 +1,40 @@
-baseURL = "http://example.org/"
+baseURL = "https://godotbuddy.com/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Godot Buddy"
+theme = "godot-buddy-theme"
+enableRobotsTXT = false
+disableKinds = ["RSS"]
+
+[menu]
+  [[menu.top]]
+    name = "Solutions"
+    weight = 1
+    url = "/solutions/"
+  [[menu.top]]
+    name = "Downloads"
+    weight = 2
+    url = "/downloads/"
+  [[menu.footer]]
+    name = "Godot Buddy"
+    weight = 1
+    identifier = "home"
+    url = "/"
+  [[menu.footer]]
+    name = "Solutions"
+    weight = 2
+    url = "/solutions/"
+  [[menu.footer]]
+    name = "Privacy Policy"
+    weight = 3
+    url = "/privacy-policy/"
+  [[menu.footer]]
+    name = "About"
+    weight = 4
+    url = "/about/"
+
+[markup]
+  [markup.highlight]
+    style = "friendly" # tango friendly perldoc https://xyproto.github.io/splash/docs/ https://xyproto.github.io/splash/docs/all.html
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

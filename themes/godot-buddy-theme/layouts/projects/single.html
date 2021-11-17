@@ -1,0 +1,26 @@
+{{ partial "header.html" . }}
+
+<div class="content">
+    {{ .Content }}
+
+    <p><a href="https://talk.gdscript.com/forum-5.html">Comments Forum</a></p>
+
+    {{- if not .IsHome }}
+    <div class="support">
+        &#128578; <a href="/support/">Support my work</a>
+    </div>
+{{ end -}}
+
+    <h2>More Godot projects</h2>
+
+    <ul>
+    {{- $url := .RelPermalink }}
+    {{- range (where .Site.RegularPages.ByWeight "Section" "projects") }}
+        {{- if (ne .RelPermalink $url) -}}
+        <li><a href="{{.Permalink}}">{{.Title}}</a></li>
+        {{- end }}
+    {{- end }}
+    </ul>
+</div>
+
+{{ partial "footer.html" . }}

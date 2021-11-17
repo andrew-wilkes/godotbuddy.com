@@ -1,0 +1,26 @@
+</div>
+</div>
+
+<div class="footer">
+    <div class="menu">
+        <p>
+        {{- $num := len .Site.Menus.footer }}
+        {{- $n := 1 }}
+        {{- $url := .RelPermalink }}
+        {{- range .Site.Menus.footer }}
+            {{- if (eq .URL $url) }}
+                {{ .Name }}
+            {{- else }}
+            <a href="{{ .URL }}">{{ .Name }}</a>
+            {{- end }}
+            {{- if (ne $num $n) }} |{{ end }}
+            {{- $n = add $n 1 }}
+        {{- end }}
+        </p>
+    </div>
+
+    <div class="copy">&#xa9; {{ now.Format "2006"}}</div>
+</div>
+
+</body>
+</html>

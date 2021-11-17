@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{ .Title }}</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+</head>
+
+<body>
+
+  <div class="header">
+    <img src="/img/godot-buddy.png" class="logo" alt="Godot Buddy"/>
+    <ul>
+        {{ $url := .RelPermalink -}}
+        {{- range .Site.Menus.top -}}
+        <li>
+          {{- if (eq .URL $url) -}}
+              {{- .Name -}}
+          {{- else -}}
+            <a href="{{ .URL }}">{{- .Name -}}</a>
+          {{- end -}}
+          </li>
+        {{- end }}
+    </ul>
+  </div>
+
+<div class="middle">
+  <div class="page">
