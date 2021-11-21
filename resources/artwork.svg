@@ -5,7 +5,7 @@
    viewBox="0 0 793.7007874 1122.519685"
    version="1.1"
    id="svg863"
-   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
    sodipodi:docname="artwork.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -24,8 +24,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="-1070.7143"
-     inkscape:cy="-973.21429"
+     inkscape:cx="-1120.7143"
+     inkscape:cy="-993.57143"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -36,7 +36,9 @@
      inkscape:window-height="1015"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
     <inkscape:grid
        type="xygrid"
        id="grid1426" />
@@ -53,31 +55,91 @@
     </rdf:RDF>
   </metadata>
   <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Base">
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1195,-1032 h 102 l -8,49 h -102 z"
+       id="path144614"
+       sodipodi:nodetypes="ccccc" />
+    <rect
+       style="fill:#a4a6a1;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.54614"
+       id="rect151145"
+       width="48"
+       height="48"
+       x="-1194.8611"
+       y="-974.58929"
+       ry="10" />
+  </g>
+  <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
     <text
        xml:space="preserve"
-       style="font-size:32px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px"
-       x="-1200"
-       y="-1040"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px"
+       x="-1198.292"
+       y="-1054.6096"
        id="text2783"><tspan
          sodipodi:role="line"
          id="tspan2781"
-         x="-1200"
-         y="-1040">LOGO</tspan></text>
+         x="-1198.292"
+         y="-1054.6096">LOGO</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:32px;line-height:1.25;font-family:Roboto;-inkscape-font-specification:Roboto;letter-spacing:0px;word-spacing:0px"
-       x="-1198.2916"
-       y="-997.79797"
-       id="text11225"
-       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/themes/godot-buddy-theme/static/img/godot-buddy.png"
-       inkscape:export-xdpi="158.81601"
-       inkscape:export-ydpi="158.81601"><tspan
+       style="font-size:10.6667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px"
+       x="-1195"
+       y="-975"
+       id="text16575"><tspan
          sodipodi:role="line"
-         id="tspan11223"
-         x="-1198.2916"
-         y="-997.79797">Godot Buddy</tspan></text>
+         id="tspan16573"
+         x="-1195"
+         y="-975"></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#729fcf;fill-opacity:1"
+       x="-1195"
+       y="-1010"
+       id="text125590"><tspan
+         sodipodi:role="line"
+         id="tspan125588"
+         x="-1195"
+         y="-1010">GODOT</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#36ffab;fill-opacity:1"
+       x="-1196.6367"
+       y="-987.14038"
+       id="text125590-2"><tspan
+         sodipodi:role="line"
+         id="tspan125588-8"
+         x="-1196.6367"
+         y="-987.14038">BUDDY</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1190,-962 h 42 l -3,23 h -42 z"
+       id="path144614-7"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#729fcf;fill-opacity:1"
+       x="-1190"
+       y="-941.76367"
+       id="text125590-3"><tspan
+         sodipodi:role="line"
+         id="tspan125588-6"
+         x="-1190"
+         y="-941.76367">G</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#36ffab;fill-opacity:1"
+       x="-1169.2415"
+       y="-941.75195"
+       id="text125590-2-1"><tspan
+         sodipodi:role="line"
+         id="tspan125588-8-2"
+         x="-1169.2415"
+         y="-941.75195">B</tspan></text>
   </g>
 </svg>
