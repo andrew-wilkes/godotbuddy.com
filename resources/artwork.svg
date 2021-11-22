@@ -62,7 +62,10 @@
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m -1195,-1032 h 102 l -8,49 h -102 z"
        id="path144614"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/themes/godot-buddy-theme/static/img/godot-buddy.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128" />
     <rect
        style="fill:#a4a6a1;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.54614"
        id="rect151145"
@@ -70,7 +73,21 @@
        height="48"
        x="-1194.8611"
        y="-974.58929"
-       ry="10" />
+       ry="10"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/resources/fb-profile.png"
+       inkscape:export-xdpi="360"
+       inkscape:export-ydpi="360" />
+    <rect
+       style="fill:#a4a6a1;fill-opacity:1;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.54614"
+       id="rect151145-8"
+       width="125"
+       height="55"
+       x="-1120"
+       y="-940"
+       ry="10"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/resources/fb-header.png"
+       inkscape:export-xdpi="787.20001"
+       inkscape:export-ydpi="787.20001" />
   </g>
   <g
      inkscape:label="Layer 1"
@@ -88,6 +105,16 @@
          y="-1054.6096">LOGO</tspan></text>
     <text
        xml:space="preserve"
+       style="font-size:21.3333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px"
+       x="-1113.6063"
+       y="-948.13086"
+       id="text2783-4"><tspan
+         sodipodi:role="line"
+         id="tspan2781-5"
+         x="-1113.6063"
+         y="-948.13086">FB Profile</tspan></text>
+    <text
+       xml:space="preserve"
        style="font-size:10.6667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px"
        x="-1195"
        y="-975"
@@ -101,7 +128,10 @@
        style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#729fcf;fill-opacity:1"
        x="-1195"
        y="-1010"
-       id="text125590"><tspan
+       id="text125590"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/themes/godot-buddy-theme/static/img/godot-buddy.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128"><tspan
          sodipodi:role="line"
          id="tspan125588"
          x="-1195"
@@ -111,22 +141,65 @@
        style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#36ffab;fill-opacity:1"
        x="-1196.6367"
        y="-987.14038"
-       id="text125590-2"><tspan
+       id="text125590-2"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/themes/godot-buddy-theme/static/img/godot-buddy.png"
+       inkscape:export-xdpi="128"
+       inkscape:export-ydpi="128"><tspan
          sodipodi:role="line"
          id="tspan125588-8"
          x="-1196.6367"
          y="-987.14038">BUDDY</tspan></text>
     <path
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1105,-937 h 102 l -8,49 h -102 z"
+       id="path144614-3"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/resources/fb-header.png"
+       inkscape:export-xdpi="787.20001"
+       inkscape:export-ydpi="787.20001" />
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#729fcf;fill-opacity:1"
+       x="-1105"
+       y="-915"
+       id="text125590-1"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/resources/fb-header.png"
+       inkscape:export-xdpi="787.20001"
+       inkscape:export-ydpi="787.20001"><tspan
+         sodipodi:role="line"
+         id="tspan125588-9"
+         x="-1105"
+         y="-915">GODOT</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#36ffab;fill-opacity:1"
+       x="-1106.6367"
+       y="-892.14038"
+       id="text125590-2-4"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/resources/fb-header.png"
+       inkscape:export-xdpi="787.20001"
+       inkscape:export-ydpi="787.20001"><tspan
+         sodipodi:role="line"
+         id="tspan125588-8-7"
+         x="-1106.6367"
+         y="-892.14038">BUDDY</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m -1190,-962 h 42 l -3,23 h -42 z"
        id="path144614-7"
-       sodipodi:nodetypes="ccccc" />
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/resources/fb-profile.png"
+       inkscape:export-xdpi="360"
+       inkscape:export-ydpi="360" />
     <text
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#729fcf;fill-opacity:1"
        x="-1190"
        y="-941.76367"
-       id="text125590-3"><tspan
+       id="text125590-3"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/resources/fb-profile.png"
+       inkscape:export-xdpi="360"
+       inkscape:export-ydpi="360"><tspan
          sodipodi:role="line"
          id="tspan125588-6"
          x="-1190"
@@ -136,7 +209,10 @@
        style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:24px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';letter-spacing:0px;word-spacing:0px;fill:#36ffab;fill-opacity:1"
        x="-1169.2415"
        y="-941.75195"
-       id="text125590-2-1"><tspan
+       id="text125590-2-1"
+       inkscape:export-filename="/home/andrew/dev/websites/godotbuddy.com/resources/fb-profile.png"
+       inkscape:export-xdpi="360"
+       inkscape:export-ydpi="360"><tspan
          sodipodi:role="line"
          id="tspan125588-8-2"
          x="-1169.2415"
