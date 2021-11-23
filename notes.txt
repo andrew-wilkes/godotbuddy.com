@@ -1,0 +1,23 @@
+wget https://nightly.link/godotengine/godot-docs/workflows/build_offline_docs/master/godot-docs-html-master.zip
+
+2021-11-22 14:17:02 (2.69 MB/s) - ‘godot-docs-html-master.zip’ saved [228765946]
+
+unzip -u godot-docs-html-master.zip -d /home/andrew/dev/websites/godotbuddy.com/data/godot-docs-html
+
+
+https://github.com/godotengine/godot/archive/refs/heads/3.4.zip
+
+3.4.zip  53.63M  8.44MB/s    in 7.3s    
+
+2021-11-22 14:47:56 (7.37 MB/s) - ‘3.4.zip’ saved [56239958]
+
+unzip -u 3.4.zip "godot-3.4/doc/classes/*" -d /home/andrew/dev/websites/godotbuddy.com/data/3.4
+
+Check size of folder.
+
+du -sh ../../data/godot-3.4
+4.4M    ../../data/godot-3.4
+
+zip -r classes.zip godot-3.4
+
+884K 11月 22 18:19 classes.zip
