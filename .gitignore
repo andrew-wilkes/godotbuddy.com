@@ -1,5 +1,6 @@
 public
 data
+classes.dat
 
 # Godot-specific ignores
 .import/
