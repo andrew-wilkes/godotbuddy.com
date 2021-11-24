@@ -1,3 +1,5 @@
+**** Data sources
+
 wget https://nightly.link/godotengine/godot-docs/workflows/build_offline_docs/master/godot-docs-html-master.zip
 
 2021-11-22 14:17:02 (2.69 MB/s) - ‘godot-docs-html-master.zip’ saved [228765946]
@@ -21,3 +23,9 @@ du -sh ../../data/godot-3.4
 zip -r classes.zip godot-3.4
 
 884K 11月 22 18:19 classes.zip
+
+**** ToDos
+
+Settings resource
+Scene to list classes and arrange in order
+Create a scene to display class info.
