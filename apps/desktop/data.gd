@@ -4,7 +4,7 @@ const DATA_FILE = "res://classes.dat"
 const SETTINGS_FILE_NAME = "user://settings.res"
 
 var classes = {}
-var settings
+var settings: Settings
 
 func _ready():
 	load_classes()
