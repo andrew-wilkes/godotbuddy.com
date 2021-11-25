@@ -10,8 +10,12 @@ func _ready():
 	load_classes()
 	settings = load_settings()
 	if settings.class_list.empty():
-		settings.class_list = Data.classes.keys()
-		settings.class_list.sort()
+		var keys = Data.classes.keys()
+		keys.sort()
+		for key in keys:
+			var class_item = ClassItem.new()
+			class_item.keyword = key
+			settings.class_list.append(class_item)
 	pass
 
 
