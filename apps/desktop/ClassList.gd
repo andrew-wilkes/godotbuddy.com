@@ -22,6 +22,7 @@ func clear_search_box():
 
 func item_pressed(button):
 	clear_search_box()
+	$VBox/C.scroll_vertical = 0
 	for class_item in Data.settings.class_list:
 		if class_item.keyword == button.text:
 			class_item.weight += 1
