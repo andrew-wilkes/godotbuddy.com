@@ -12,13 +12,20 @@ func _ready():
 		list.add_child(button)
 		button.connect("pressed", self, "item_pressed", [button])
 	update_labels()
+	clear_search_box()
+
+
+func clear_search_box():
 	$VBox/SS.grab_focus()
+	$VBox/SS.text = ""
 
 
 func item_pressed(button):
+	clear_search_box()
 	for class_item in Data.settings.class_list:
 		if class_item.keyword == button.text:
 			class_item.weight += 1
+			Data.settings_changed = true
 	update_labels()
 
 
@@ -57,6 +64,7 @@ func _on_SS_text_changed(new_text: String):
 		for i in list.get_child_count():
 			if new_text.to_lower() in Data.settings.class_list[i].keyword.to_lower():
 				matches.append(i)
+		# Make all visible or just those matched
 		for i in list.get_child_count():
 			var vis = true if matches.size() == 0 else i in matches
 			list.get_child(i).visible = vis

@@ -5,11 +5,13 @@ const SETTINGS_FILE_NAME = "user://settings.res"
 
 var classes = {}
 var settings: Settings
+var settings_changed = false
 
 func _ready():
 	load_classes()
 	settings = load_settings()
 	if settings.class_list.empty():
+		settings_changed = true
 		var keys = Data.classes.keys()
 		keys.sort()
 		for key in keys:
@@ -65,3 +67,9 @@ func load_settings(file_name = SETTINGS_FILE_NAME):
 
 func save_settings(_settings, file_name = SETTINGS_FILE_NAME):
 	assert(ResourceSaver.save(file_name, _settings) == OK)
+
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		if settings_changed:
+			save_settings(settings)
