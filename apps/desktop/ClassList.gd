@@ -61,9 +61,11 @@ func _on_SS_text_changed(new_text: String):
 	if new_text.length() > 1:
 		# Find close matches
 		var matches = []
-		for i in list.get_child_count():
-			if new_text.to_lower() in Data.settings.class_list[i].keyword.to_lower():
-				matches.append(i)
+		var idx = 0
+		for item in list.get_children():
+			if new_text.to_lower() in item.text.to_lower():
+				matches.append(idx)
+			idx += 1
 		# Make all visible or just those matched
 		for i in list.get_child_count():
 			var vis = true if matches.size() == 0 else i in matches

@@ -18,7 +18,6 @@ func _ready():
 			var class_item = ClassItem.new()
 			class_item.keyword = key
 			settings.class_list.append(class_item)
-	pass
 
 
 func get_class_info(xml):
