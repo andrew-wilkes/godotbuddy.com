@@ -57,8 +57,10 @@ func update_labels():
 				break
 		i += 1
 	for item in unweighted_items:
-		list.get_child(i).text = item.keyword
-		list.get_child(i).hint_tooltip = get_brief_description(item.keyword)
+		var button: Button = list.get_child(i)
+		button.text = item.keyword
+		button.hint_tooltip = get_brief_description(item.keyword)
+		button.modulate = button_color
 		i += 1
 	for item in list.get_children():
 		item.visible = true
