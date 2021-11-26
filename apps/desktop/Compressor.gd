@@ -1,4 +1,4 @@
-# Run this scene to generate data file from XML files
+# Run this scene to generate data file
 
 extends Control
 

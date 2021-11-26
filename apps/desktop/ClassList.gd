@@ -9,6 +9,7 @@ func _ready():
 	for class_item in Data.settings.class_list:
 		var button = list_button.instance()
 		button.text = class_item.keyword
+		button.hint_tooltip = get_brief_description(Data.classes[class_item.keyword])
 		list.add_child(button)
 		button.connect("pressed", self, "item_pressed", [button])
 	button_color = list.get_child(0).modulate
@@ -74,3 +75,7 @@ func _on_SS_text_changed(new_text: String):
 	for i in list.get_child_count():
 		var vis = true if matches.size() == 0 else i in matches
 		list.get_child(i).visible = vis
+
+
+func get_brief_description(xml: PoolByteArray):
+	return xml.get_string_from_ascii().split("brief_description")[1].split("\n")[1].dedent().replace("[", "").replace("]", "")

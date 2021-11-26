@@ -20,12 +20,6 @@ func _ready():
 			settings.class_list.append(class_item)
 
 
-func get_class_info(xml):
-	var parser = XMLParser.new()
-	if parser.open_buffer(xml) == OK:
-		pass
-
-
 # Add class info to dictionary
 func load_classes():
 	# var t = OS.get_system_time_msecs()
