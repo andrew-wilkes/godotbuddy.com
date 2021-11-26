@@ -1,3 +1,5 @@
+# Run this scene to generate data file from XML files
+
 extends Control
 
 const FOLDER = "/home/andrew/dev/websites/godotbuddy.com/data/godot-3.4/doc/classes/"
