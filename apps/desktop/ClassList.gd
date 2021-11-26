@@ -1,16 +1,17 @@
 extends Control
 
 var list: VBoxContainer
+var list_button = preload("res://ListButton.tscn")
+var button_color: Color
 
 func _ready():
-	list = $VBox/C/VBox
+	list = $VBox/C/M/VBox
 	for class_item in Data.settings.class_list:
-		var button = Button.new()
-		button.align = Button.ALIGN_LEFT
-		button.flat = true
+		var button = list_button.instance()
 		button.text = class_item.keyword
 		list.add_child(button)
 		button.connect("pressed", self, "item_pressed", [button])
+	button_color = list.get_child(0).modulate
 	update_labels()
 	clear_search_box()
 
@@ -47,7 +48,9 @@ func update_labels():
 	for weight in weights:
 		for item in weighted_items: # Find first item with this weight
 			if item.weight == weight:
-				list.get_child(i).text = item.keyword
+				var button: Button = list.get_child(i)
+				button.text = item.keyword
+				button.modulate = button_color.lightened(0.2)
 				item.weight = 0 # Skip this item for this weight from now on
 				break
 		i += 1
@@ -59,15 +62,15 @@ func update_labels():
 
 
 func _on_SS_text_changed(new_text: String):
+	var matches = []
 	if new_text.length() > 1:
 		# Find close matches
-		var matches = []
 		var idx = 0
 		for item in list.get_children():
 			if new_text.to_lower() in item.text.to_lower():
 				matches.append(idx)
 			idx += 1
-		# Make all visible or just those matched
-		for i in list.get_child_count():
-			var vis = true if matches.size() == 0 else i in matches
-			list.get_child(i).visible = vis
+	# Make all visible or just those matched
+	for i in list.get_child_count():
+		var vis = true if matches.size() == 0 else i in matches
+		list.get_child(i).visible = vis
