@@ -3,13 +3,12 @@ extends Control
 var list: VBoxContainer
 var list_button = preload("res://ListButton.tscn")
 var button_color: Color
+var item_desc = {}
 
 func _ready():
 	list = $VBox/C/M/VBox
 	for class_item in Data.settings.class_list:
 		var button = list_button.instance()
-		button.text = class_item.keyword
-		button.hint_tooltip = get_brief_description(Data.classes[class_item.keyword])
 		list.add_child(button)
 		button.connect("pressed", self, "item_pressed", [button])
 	button_color = list.get_child(0).modulate
@@ -43,7 +42,7 @@ func update_labels():
 			weights.append(weight)
 			weighted_items.append(class_item.duplicate())
 		else:
-			unweighted_items.append(class_item.keyword)
+			unweighted_items.append(class_item)
 	weights.sort()
 	weights.invert()
 	var i = 0
@@ -52,12 +51,14 @@ func update_labels():
 			if item.weight == weight:
 				var button: Button = list.get_child(i)
 				button.text = item.keyword
+				button.hint_tooltip = get_brief_description(item.keyword)
 				button.modulate = button_color.lightened(0.2)
 				item.weight = 0 # Skip this item for this weight from now on
 				break
 		i += 1
-	for keyword in unweighted_items:
-		list.get_child(i).text = keyword
+	for item in unweighted_items:
+		list.get_child(i).text = item.keyword
+		list.get_child(i).hint_tooltip = get_brief_description(item.keyword)
 		i += 1
 	for item in list.get_children():
 		item.visible = true
@@ -78,7 +79,7 @@ func _on_SS_text_changed(new_text: String):
 		list.get_child(i).visible = vis
 
 
-func get_brief_description(xml: PoolByteArray):
-	# This one-liner saves doing a lot of XML parsing
-	# Also, it could add to a cache if the speed of creating the list is slow which it isn't on my PC
-	return xml.get_string_from_ascii().split("brief_description")[1].split("\n")[1].dedent().replace("[", "").replace("]", "")
+func get_brief_description(key):
+	if not item_desc.has(key):
+		item_desc[key] = Data.classes[key].get_string_from_ascii().split("brief_description")[1].split("\n")[1].dedent().replace("[", "").replace("]", "")
+	return item_desc[key]
