@@ -5,7 +5,7 @@
 
 The **website** uses the [HUGO](https://gohugo.io) static website generator.
 
-The **Apps** are developed in the [Godot](godotengine.org) game engine.
+The **Apps** are developed in the [Godot](https://godotengine.org) game engine.
 
 ## Tools
 
