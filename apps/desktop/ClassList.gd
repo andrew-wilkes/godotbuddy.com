@@ -29,6 +29,7 @@ func item_pressed(button):
 		if class_item.keyword == button.text:
 			class_item.weight += 1
 			Data.settings_changed = true
+			break
 	update_labels()
 
 
@@ -78,4 +79,6 @@ func _on_SS_text_changed(new_text: String):
 
 
 func get_brief_description(xml: PoolByteArray):
+	# This one-liner saves doing a lot of XML parsing
+	# Also, it could add to a cache if the speed of creating the list is slow which it isn't on my PC
 	return xml.get_string_from_ascii().split("brief_description")[1].split("\n")[1].dedent().replace("[", "").replace("]", "")
