@@ -8,6 +8,7 @@ func get_info(cname):
 	var group_name = ""
 	var member_name = ""
 	var text_target
+	var method_target
 	var text_node_name
 	var text_mode
 	var parser = XMLParser.new()
@@ -35,24 +36,24 @@ func get_info(cname):
 							text_node_name = parser.get_named_attribute_value_safe("title")
 							text_target = info[group_name]
 						"methods":
-							info[node_name] = {}
+							info[node_name] = [] # Methods may have the same name so can't use name as key
 							group_name = node_name
 							text_node_name = "description"
 						"method":
-							member_name = parser.get_named_attribute_value("name")
 							var method = {
+								"name": parser.get_named_attribute_value("name"),
 								"qualifiers": parser.get_named_attribute_value_safe("qualifiers"),
 								"args": {},
 								"return_type": "",
 							}
-							info[group_name][member_name] = method
-							text_target = info[group_name][member_name]
+							info[group_name].append(method)
+							method_target = method
 							text_mode = RAW
 						"return":
-							info[group_name][member_name]["return_type"] = parser.get_named_attribute_value("type")
+							method_target["return_type"] = parser.get_named_attribute_value("type")
 						"argument":
 							var keys = ["index", "type", "default"]
-							var _member_name = add_argument(parser, info, group_name, member_name, keys)
+							var _member_name = add_argument(parser, method_target, keys)
 						"members":
 							info[node_name] = {}
 							group_name = node_name
@@ -98,12 +99,12 @@ func add_member(parser: XMLParser, info: Dictionary, group_name, keys: Array) ->
 	return member_name
 
 
-func add_argument(parser: XMLParser, info: Dictionary, group_name, member_name, keys: Array):
+func add_argument(parser: XMLParser, method_target, keys: Array):
 	var arg_name = parser.get_named_attribute_value("name")
 	var arg = {}
 	for key in keys:
 		arg[key] = parser.get_named_attribute_value_safe(key)
-	info[group_name][member_name]["args"][arg_name] = arg
+	method_target["args"][arg_name] = arg
 
 
 func get_node_text(txt: String):
