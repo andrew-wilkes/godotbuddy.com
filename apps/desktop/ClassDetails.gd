@@ -2,11 +2,6 @@ extends Control
 
 enum { RAW, FORMATTED }
 
-func _ready():
-	var info = get_info("AABB")
-	pass
-
-
 func get_info(cname):
 	var info = {}
 	var node_name = ""
@@ -37,7 +32,7 @@ func get_info(cname):
 							info[node_name] = {}
 							group_name = node_name
 						"link":
-							text_node_name = parser.get_named_attribute_value("title")
+							text_node_name = parser.get_named_attribute_value_safe("title")
 							text_target = info[group_name]
 						"methods":
 							info[node_name] = {}
@@ -104,7 +99,7 @@ func add_member(parser: XMLParser, info: Dictionary, group_name, keys: Array) ->
 
 
 func get_node_text(txt: String):
-	return txt.replace("\n", "").dedent()
+	return txt.lstrip("\n\t ").rstrip("\n\t ").replace("\t", "")
 
 
 func format_text(txt):
