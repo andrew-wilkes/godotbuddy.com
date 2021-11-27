@@ -52,7 +52,7 @@ func get_info(cname):
 							info[group_name][member_name]["return_type"] = parser.get_named_attribute_value("type")
 						"argument":
 							var keys = ["index", "type", "default"]
-							member_name = add_member(parser, info, group_name, keys)
+							var _member_name = add_argument(parser, info, group_name, member_name, keys)
 						"members":
 							info[node_name] = {}
 							group_name = node_name
@@ -96,6 +96,14 @@ func add_member(parser: XMLParser, info: Dictionary, group_name, keys: Array) ->
 		member[key] = parser.get_named_attribute_value_safe(key)
 	info[group_name][member_name] = member
 	return member_name
+
+
+func add_argument(parser: XMLParser, info: Dictionary, group_name, member_name, keys: Array):
+	var arg_name = parser.get_named_attribute_value("name")
+	var arg = {}
+	for key in keys:
+		arg[key] = parser.get_named_attribute_value_safe(key)
+	info[group_name][member_name]["args"][arg_name] = arg
 
 
 func get_node_text(txt: String):

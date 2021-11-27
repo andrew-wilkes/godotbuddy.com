@@ -2,13 +2,18 @@ extends Control
 
 func _ready():
 	# test_class_details_get_info()
+	save_class_info("Array")
 	pass
 
 
 func test_class_details_get_info():
 	for cname in Data.classes.keys():
-		var info = JSON.print($ClassDetails.get_info(cname), "\t")
-		save(info, "../../data/temp/" + cname + ".txt")
+		save_class_info(cname)
+
+
+func save_class_info(cname):
+	var info = JSON.print($ClassDetails.get_info(cname), "\t")
+	save(info, "../../data/temp/" + cname + ".txt")
 
 
 func save(content, file_name):
