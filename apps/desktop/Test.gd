@@ -2,7 +2,7 @@ extends Control
 
 func _ready():
 	# test_class_details_get_info()
-	save_class_info("@GlobalScope")
+	save_class_info("Array")
 	pass
 
 

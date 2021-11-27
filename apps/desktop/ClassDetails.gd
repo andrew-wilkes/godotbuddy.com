@@ -36,17 +36,20 @@ func get_info(cname):
 							text_node_name = parser.get_named_attribute_value_safe("title")
 							text_target = info[group_name]
 						"methods":
-							info[node_name] = [] # Methods may have the same name so can't use name as key
+							info[node_name] = {} # Methods may have the same name
 							group_name = node_name
 							text_node_name = "description"
 						"method":
+							var method_name = parser.get_named_attribute_value("name")
 							var method = {
-								"name": parser.get_named_attribute_value("name"),
 								"qualifiers": parser.get_named_attribute_value_safe("qualifiers"),
 								"args": {},
 								"return_type": "",
 							}
-							info[group_name].append(method)
+							if info[group_name].has(method_name):
+								info[group_name][method_name].append(method)
+							else:
+								info[group_name][method_name] = [method]
 							method_target = method
 							text_mode = RAW
 						"return":
