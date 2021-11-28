@@ -2,6 +2,32 @@ extends Control
 
 enum { RAW, FORMATTED }
 
+export(Color) var code_color = Color(255, 155, 0)
+
+var desc: RichTextLabel
+var descbox
+var notes
+var desc_button
+var notes_button
+
+func _ready():
+	desc = find_node("Desc")
+	descbox = find_node("DescBox")
+	notes = find_node("Notes")
+	desc_button = find_node("DescButton")
+	notes_button = find_node("NotesButton")
+	desc.bbcode_text = text_to_bbcode(desc.bbcode_text)
+	call_deferred("set_description_scroll_container_size")
+
+
+func set_description_scroll_container_size():
+	# Set min size of scroll container based on desc size.y
+	if desc.rect_size.y < descbox.get_child(0).rect_min_size.y:
+		descbox.get_child(0).rect_min_size.y = desc.rect_size.y
+	descbox.hide()
+	notes.get_parent().hide()
+
+
 func get_info(cname):
 	var info = {}
 	var node_name = ""
@@ -116,3 +142,37 @@ func get_node_text(txt: String):
 
 func format_text(txt):
 	return txt.replace("[", "").replace("]", "")
+
+
+func text_to_bbcode(txt: String):
+	txt = add_links(txt)
+	return txt.c_unescape() \
+	.replace("codeblock]", "code]") \
+	.replace("[code]", "[code][color=#" + code_color.to_html(false) + "]") \
+	.replace("[/code]", "[/color][/code]")
+
+
+func add_links(txt: String):
+	var regex = RegEx.new()
+	regex.compile("\\[([A-Z]\\w+)\\]")
+	for result in regex.search_all(txt):
+		var cname = result.get_string(1)
+		var link = "[url=%s]%s[/url]" % [cname, cname]
+		var target = result.get_string(0)
+		txt = txt.replace(target, link)
+	return txt
+
+
+func _on_Desc_meta_clicked(meta):
+	print(meta)
+
+
+func _on_Description_pressed():
+	descbox.visible = not descbox.visible
+	desc_button.text = "-" if descbox.visible else "+"
+
+
+func _on_NotesButton_pressed():
+	var nb = notes.get_parent()
+	nb.visible = not nb.visible
+	notes_button.text = "-" if nb.visible else "+"
