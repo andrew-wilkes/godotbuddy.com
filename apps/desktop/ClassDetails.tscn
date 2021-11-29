@@ -122,11 +122,23 @@ text = "+"
 [node name="BDesc" type="Label" parent="SC/VBox/HBox1"]
 margin_left = 28.0
 margin_top = 3.0
-margin_right = 640.0
+margin_right = 316.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "Standard themed Button."
 autowrap = true
+
+[node name="Sp" type="Control" parent="SC/VBox/HBox1"]
+margin_left = 324.0
+margin_right = 612.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="SC/VBox/HBox1"]
+margin_left = 620.0
+margin_right = 640.0
+margin_bottom = 20.0
+text = "<"
 
 [node name="Sp2" type="Control" parent="SC/VBox"]
 margin_top = 80.0
@@ -254,5 +266,6 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
+[connection signal="pressed" from="SC/VBox/HBox1/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="SC/VBox/HBox2/NotesButton" to="." method="_on_NotesButton_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/Desc" to="." method="_on_Desc_meta_clicked"]

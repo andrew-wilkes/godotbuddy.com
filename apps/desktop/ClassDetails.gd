@@ -11,6 +11,9 @@ var notes
 var desc_button
 var notes_button
 var first_run = true
+var history = []
+var stepping_back = false
+var back_button
 
 func _ready():
 	desc = find_node("Desc")
@@ -18,17 +21,36 @@ func _ready():
 	notes = find_node("Notes")
 	desc_button = find_node("DescButton")
 	notes_button = find_node("NotesButton")
+	back_button = find_node("BackButton")
+	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
-	update_content("Area2D")
+	update_content("File")
 
 
-func update_content(cname):
+func update_content(cname, new = true):
+	if new:
+		if stepping_back:
+			history.clear()
+			stepping_back = false
+		set_back_button_state()
+		history.append(cname)
+	else:
+		if not stepping_back:
+			stepping_back = true
+			# Get the previous cname
+			cname = history.pop_back()
+		set_back_button_state()
+
 	var info = get_info(cname)
 	find_node("ClassName").text = cname
 	find_node("BDesc").text = info.brief_description
 	desc.bbcode_text = text_to_bbcode(info.description)
 	call_deferred("set_description_scroll_container_size")
+
+
+func set_back_button_state():
+		back_button.disabled = true if history.size() < 1 else false
 
 
 func set_description_scroll_container_size():
@@ -193,3 +215,7 @@ func _on_NotesButton_pressed():
 	var nb = notes.get_parent()
 	nb.visible = not nb.visible
 	notes_button.text = "-" if nb.visible else "+"
+
+
+func _on_BackButton_pressed():
+	update_content(history.pop_back(), false)
