@@ -3,12 +3,14 @@ extends Control
 enum { RAW, FORMATTED }
 
 export(Color) var code_color = Color(255, 155, 0)
+export(int) var max_description_size_y = 400
 
 var desc: RichTextLabel
 var descbox
 var notes
 var desc_button
 var notes_button
+var first_run = true
 
 func _ready():
 	desc = find_node("Desc")
@@ -16,18 +18,9 @@ func _ready():
 	notes = find_node("Notes")
 	desc_button = find_node("DescButton")
 	notes_button = find_node("NotesButton")
-	update_content("Area2D")
-	call_deferred("set_description_scroll_container_size")
-
-
-func set_description_scroll_container_size():
-	# Make RichTextLabel shrink to fit content
-	desc.rect_size.y = 0
-	# Set min size of scroll container based on desc size.y
-	if desc.rect_size.y < descbox.get_child(0).rect_min_size.y:
-		descbox.get_child(0).rect_min_size.y = desc.rect_size.y
 	descbox.hide()
 	notes.get_parent().hide()
+	update_content("Area2D")
 
 
 func update_content(cname):
@@ -35,6 +28,20 @@ func update_content(cname):
 	find_node("ClassName").text = cname
 	find_node("BDesc").text = info.brief_description
 	desc.bbcode_text = text_to_bbcode(info.description)
+	call_deferred("set_description_scroll_container_size")
+
+
+func set_description_scroll_container_size():
+	if first_run:
+		first_run = false
+		# RichTextLabel does not resize on first run if child of scroll container
+		desc.get_parent().remove_child(desc)
+		descbox.get_child(0).add_child(desc)
+	# Make RichTextLabel shrink to fit content
+	desc.rect_size.y = 0
+	# Set min size of scroll container based on desc size.y
+	var scroll_container = descbox.get_child(0)
+	scroll_container.rect_min_size.y = min(desc.rect_size.y, max_description_size_y)
 
 
 func get_info(cname):
@@ -173,7 +180,8 @@ func add_links(txt: String):
 
 
 func _on_Desc_meta_clicked(meta):
-	print(meta)
+	desc.rect_min_size.y = 0
+	update_content(meta)
 
 
 func _on_Description_pressed():

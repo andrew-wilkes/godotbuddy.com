@@ -8,6 +8,10 @@
 [ext_resource path="res://assets/fonts/OpenSans-Italic.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/fonts/Bitstream Vera Sans Mono Roman.ttf" type="DynamicFontData" id=7]
 
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 3 )
+
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 7 )
 
@@ -19,10 +23,6 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 5 )
-
-[sub_resource type="DynamicFont" id=1]
-size = 18
-font_data = ExtResource( 3 )
 
 [node name="ClassDetails" type="MarginContainer"]
 anchor_right = 1.0
@@ -46,7 +46,7 @@ margin_bottom = 591.0
 
 [node name="VBox" type="VBoxContainer" parent="SC"]
 margin_right = 640.0
-margin_bottom = 716.0
+margin_bottom = 348.0
 rect_min_size = Vector2( 640, 0 )
 
 [node name="HBox" type="HBoxContainer" parent="SC/VBox"]
@@ -137,44 +137,25 @@ rect_min_size = Vector2( 0, 10 )
 [node name="DescBox" type="VBoxContainer" parent="SC/VBox"]
 margin_top = 94.0
 margin_right = 640.0
-margin_bottom = 508.0
+margin_bottom = 108.0
 size_flags_horizontal = 3
 
 [node name="SC" type="ScrollContainer" parent="SC/VBox/DescBox"]
 margin_right = 640.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 0, 400 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Desc" type="RichTextLabel" parent="SC/VBox/DescBox/SC"]
-margin_right = 640.0
-margin_bottom = 336.0
-size_flags_horizontal = 3
-custom_constants/line_separation = 5
-custom_fonts/mono_font = SubResource( 2 )
-custom_fonts/italics_font = SubResource( 3 )
-custom_fonts/bold_font = SubResource( 4 )
-custom_fonts/normal_font = SubResource( 5 )
-bbcode_enabled = true
-bbcode_text = "Button is the standard themed button. It can contain text and an icon, and will display them according to the current [Theme].\\n[b]Example of creating a button and assigning an action when pressed by code:[/b]\\n[codeblock]\\nfunc _ready():\\n    var button = Button.new()\\n    button.text = \\\"Click me\\\"\\n    button.connect(\\\"pressed\\\", self, \\\"_button_pressed\\\")\\n    add_child(button)\\n\\nfunc _button_pressed():\\n    print(\\\"Hello world!\\\")\\n[/codeblock]\\nButtons (like all Control nodes) can also be created in the editor, but some situations may require creating them from code.\\nSee also [BaseButton] which contains common properties and methods associated with this node.\\n[b]Note:[/b] Buttons do not interpret touch input and therefore don't support multitouch, since mouse emulation can only press one button at a given time. Use [TouchScreenButton] for buttons that trigger gameplay movement or actions, as [TouchScreenButton] supports multitouch."
-text = "Button is the standard themed button. It can contain text and an icon, and will display them according to the current [Theme].\\nExample of creating a button and assigning an action when pressed by code:\\n[codeblock]\\nfunc _ready():\\n    var button = Button.new()\\n    button.text = \\\"Click me\\\"\\n    button.connect(\\\"pressed\\\", self, \\\"_button_pressed\\\")\\n    add_child(button)\\n\\nfunc _button_pressed():\\n    print(\\\"Hello world!\\\")\\n[/codeblock]\\nButtons (like all Control nodes) can also be created in the editor, but some situations may require creating them from code.\\nSee also [BaseButton] which contains common properties and methods associated with this node.\\nNote: Buttons do not interpret touch input and therefore don't support multitouch, since mouse emulation can only press one button at a given time. Use [TouchScreenButton] for buttons that trigger gameplay movement or actions, as [TouchScreenButton] supports multitouch."
-fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Sp2" type="Control" parent="SC/VBox/DescBox"]
-margin_top = 404.0
+margin_top = 4.0
 margin_right = 640.0
-margin_bottom = 414.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox2" type="HBoxContainer" parent="SC/VBox"]
-margin_top = 512.0
+margin_top = 112.0
 margin_right = 640.0
-margin_bottom = 532.0
+margin_bottom = 132.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
@@ -199,15 +180,15 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="Sp3" type="Control" parent="SC/VBox"]
-margin_top = 536.0
+margin_top = 136.0
 margin_right = 640.0
-margin_bottom = 546.0
+margin_bottom = 146.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="NotesBox" type="VBoxContainer" parent="SC/VBox"]
-margin_top = 550.0
+margin_top = 150.0
 margin_right = 640.0
-margin_bottom = 664.0
+margin_bottom = 264.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -229,9 +210,9 @@ margin_bottom = 114.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="TabContainer" type="TabContainer" parent="SC/VBox"]
-margin_top = 668.0
+margin_top = 268.0
 margin_right = 640.0
-margin_bottom = 716.0
+margin_bottom = 316.0
 custom_fonts/font = SubResource( 1 )
 tab_align = 0
 
@@ -254,6 +235,24 @@ margin_top = 44.0
 visible = false
 margin_top = 44.0
 
+[node name="Desc" type="RichTextLabel" parent="SC/VBox"]
+margin_top = 320.0
+margin_right = 640.0
+margin_bottom = 348.0
+focus_mode = 2
+size_flags_horizontal = 3
+custom_constants/line_separation = 5
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/italics_font = SubResource( 3 )
+custom_fonts/bold_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+fit_content_height = true
+selection_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
-[connection signal="meta_clicked" from="SC/VBox/DescBox/SC/Desc" to="." method="_on_Desc_meta_clicked"]
 [connection signal="pressed" from="SC/VBox/HBox2/NotesButton" to="." method="_on_NotesButton_pressed"]
+[connection signal="meta_clicked" from="SC/VBox/Desc" to="." method="_on_Desc_meta_clicked"]
