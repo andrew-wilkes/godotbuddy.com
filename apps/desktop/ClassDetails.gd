@@ -16,16 +16,25 @@ func _ready():
 	notes = find_node("Notes")
 	desc_button = find_node("DescButton")
 	notes_button = find_node("NotesButton")
-	desc.bbcode_text = text_to_bbcode(desc.bbcode_text)
+	update_content("Area2D")
 	call_deferred("set_description_scroll_container_size")
 
 
 func set_description_scroll_container_size():
+	# Make RichTextLabel shrink to fit content
+	desc.rect_size.y = 0
 	# Set min size of scroll container based on desc size.y
 	if desc.rect_size.y < descbox.get_child(0).rect_min_size.y:
 		descbox.get_child(0).rect_min_size.y = desc.rect_size.y
 	descbox.hide()
 	notes.get_parent().hide()
+
+
+func update_content(cname):
+	var info = get_info(cname)
+	find_node("ClassName").text = cname
+	find_node("BDesc").text = info.brief_description
+	desc.bbcode_text = text_to_bbcode(info.description)
 
 
 func get_info(cname):

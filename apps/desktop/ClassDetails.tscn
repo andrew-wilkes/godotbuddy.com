@@ -65,13 +65,13 @@ text = "Class:"
 [node name="ClassName" type="Label" parent="SC/VBox/HBox"]
 margin_left = 78.0
 margin_top = 2.0
-margin_right = 159.0
+margin_right = 161.0
 margin_bottom = 36.0
 custom_fonts/font = ExtResource( 2 )
-text = "cname"
+text = "Button"
 
 [node name="Sp1" type="Control" parent="SC/VBox/HBox"]
-margin_left = 169.0
+margin_left = 171.0
 margin_right = 330.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
@@ -87,7 +87,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="SC/VBox/HBox/VBox"]
 margin_right = 300.0
 margin_bottom = 14.0
-text = "Priority"
+text = "Interest level"
 
 [node name="HSlider" type="HSlider" parent="SC/VBox/HBox/VBox"]
 margin_top = 18.0
@@ -125,7 +125,7 @@ margin_top = 3.0
 margin_right = 640.0
 margin_bottom = 17.0
 size_flags_horizontal = 3
-text = "Brief description"
+text = "Standard themed Button."
 autowrap = true
 
 [node name="Sp2" type="Control" parent="SC/VBox"]
@@ -235,7 +235,23 @@ margin_bottom = 716.0
 custom_fonts/font = SubResource( 1 )
 tab_align = 0
 
-[node name="Card" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
+[node name="Methods" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
+margin_top = 44.0
+
+[node name="Properties" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
+visible = false
+margin_top = 44.0
+
+[node name="Signals" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
+visible = false
+margin_top = 44.0
+
+[node name="Constants" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
+visible = false
+margin_top = 44.0
+
+[node name="Tutorials" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
+visible = false
 margin_top = 44.0
 
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
