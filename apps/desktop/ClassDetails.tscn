@@ -8,10 +8,6 @@
 [ext_resource path="res://assets/fonts/OpenSans-Italic.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/fonts/Bitstream Vera Sans Mono Roman.ttf" type="DynamicFontData" id=7]
 
-[sub_resource type="DynamicFont" id=1]
-size = 18
-font_data = ExtResource( 3 )
-
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 7 )
 
@@ -23,6 +19,10 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 3 )
 
 [node name="ClassDetails" type="MarginContainer"]
 anchor_right = 1.0
@@ -45,12 +45,13 @@ margin_right = 1015.0
 margin_bottom = 591.0
 
 [node name="VBox" type="VBoxContainer" parent="SC"]
-margin_right = 640.0
-margin_bottom = 348.0
-rect_min_size = Vector2( 640, 0 )
+margin_right = 1006.0
+margin_bottom = 356.0
+rect_min_size = Vector2( 720, 0 )
+size_flags_horizontal = 3
 
 [node name="HBox" type="HBoxContainer" parent="SC/VBox"]
-margin_right = 640.0
+margin_right = 1006.0
 margin_bottom = 38.0
 custom_constants/separation = 10
 
@@ -72,13 +73,13 @@ text = "Button"
 
 [node name="Sp1" type="Control" parent="SC/VBox/HBox"]
 margin_left = 171.0
-margin_right = 330.0
+margin_right = 696.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 
 [node name="VBox" type="VBoxContainer" parent="SC/VBox/HBox"]
-margin_left = 340.0
-margin_right = 640.0
+margin_left = 706.0
+margin_right = 1006.0
 margin_bottom = 38.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -103,71 +104,82 @@ size_flags_vertical = 3
 
 [node name="Sp1" type="Control" parent="SC/VBox"]
 margin_top = 42.0
-margin_right = 640.0
+margin_right = 1006.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox1" type="HBoxContainer" parent="SC/VBox"]
 margin_top = 56.0
-margin_right = 640.0
-margin_bottom = 76.0
+margin_right = 1006.0
+margin_bottom = 84.0
 custom_constants/separation = 8
 
 [node name="DescButton" type="Button" parent="SC/VBox/HBox1"]
 margin_right = 20.0
-margin_bottom = 20.0
+margin_bottom = 28.0
 hint_tooltip = "Detailed description"
 text = "+"
 
-[node name="BDesc" type="Label" parent="SC/VBox/HBox1"]
+[node name="BDesc" type="RichTextLabel" parent="SC/VBox/HBox1"]
 margin_left = 28.0
-margin_top = 3.0
-margin_right = 316.0
-margin_bottom = 17.0
+margin_right = 978.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
-text = "Standard themed Button."
-autowrap = true
-
-[node name="Sp" type="Control" parent="SC/VBox/HBox1"]
-margin_left = 324.0
-margin_right = 612.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="BackButton" type="Button" parent="SC/VBox/HBox1"]
-margin_left = 620.0
-margin_right = 640.0
-margin_bottom = 20.0
-text = "<"
-
-[node name="Sp2" type="Control" parent="SC/VBox"]
-margin_top = 80.0
-margin_right = 640.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 0, 10 )
-
-[node name="DescBox" type="VBoxContainer" parent="SC/VBox"]
-margin_top = 94.0
-margin_right = 640.0
-margin_bottom = 108.0
-size_flags_horizontal = 3
-
-[node name="SC" type="ScrollContainer" parent="SC/VBox/DescBox"]
-margin_right = 640.0
+custom_constants/line_separation = 5
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/italics_font = SubResource( 3 )
+custom_fonts/bold_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+fit_content_height = true
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BackButton" type="Button" parent="SC/VBox/HBox1"]
+margin_left = 986.0
+margin_right = 1006.0
+margin_bottom = 28.0
+text = "<"
+
+[node name="Sp2" type="Control" parent="SC/VBox"]
+margin_top = 88.0
+margin_right = 1006.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="DescBox" type="VBoxContainer" parent="SC/VBox"]
+margin_top = 102.0
+margin_right = 1006.0
+margin_bottom = 116.0
+size_flags_horizontal = 3
+
+[node name="HBox" type="HBoxContainer" parent="SC/VBox/DescBox"]
+margin_right = 1006.0
+
+[node name="SC" type="ScrollContainer" parent="SC/VBox/DescBox/HBox"]
+margin_right = 982.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sp" type="Control" parent="SC/VBox/DescBox/HBox"]
+margin_left = 986.0
+margin_right = 1006.0
+rect_min_size = Vector2( 20, 0 )
+
 [node name="Sp2" type="Control" parent="SC/VBox/DescBox"]
 margin_top = 4.0
-margin_right = 640.0
+margin_right = 1006.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox2" type="HBoxContainer" parent="SC/VBox"]
-margin_top = 112.0
-margin_right = 640.0
-margin_bottom = 132.0
+margin_top = 120.0
+margin_right = 1006.0
+margin_bottom = 140.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
@@ -187,44 +199,55 @@ text = "Notes"
 
 [node name="Sp" type="Control" parent="SC/VBox/HBox2"]
 margin_left = 74.0
-margin_right = 640.0
+margin_right = 1006.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="Sp3" type="Control" parent="SC/VBox"]
-margin_top = 136.0
-margin_right = 640.0
-margin_bottom = 146.0
+margin_top = 144.0
+margin_right = 1006.0
+margin_bottom = 154.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="NotesBox" type="VBoxContainer" parent="SC/VBox"]
-margin_top = 150.0
-margin_right = 640.0
-margin_bottom = 264.0
+margin_top = 158.0
+margin_right = 1006.0
+margin_bottom = 272.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Notes" type="TextEdit" parent="SC/VBox/NotesBox"]
-margin_right = 640.0
+[node name="HBox" type="HBoxContainer" parent="SC/VBox/NotesBox"]
+margin_right = 1006.0
+margin_bottom = 100.0
+
+[node name="Notes" type="TextEdit" parent="SC/VBox/NotesBox/HBox"]
+margin_right = 982.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
 text = "My notes
 "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sp" type="Control" parent="SC/VBox/NotesBox/HBox"]
+margin_left = 986.0
+margin_right = 1006.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 20, 0 )
+
 [node name="Sp4" type="Control" parent="SC/VBox/NotesBox"]
 margin_top = 104.0
-margin_right = 640.0
+margin_right = 1006.0
 margin_bottom = 114.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="TabContainer" type="TabContainer" parent="SC/VBox"]
-margin_top = 268.0
-margin_right = 640.0
-margin_bottom = 316.0
+margin_top = 276.0
+margin_right = 1006.0
+margin_bottom = 324.0
 custom_fonts/font = SubResource( 1 )
 tab_align = 0
 
@@ -248,9 +271,9 @@ visible = false
 margin_top = 44.0
 
 [node name="Desc" type="RichTextLabel" parent="SC/VBox"]
-margin_top = 320.0
-margin_right = 640.0
-margin_bottom = 348.0
+margin_top = 328.0
+margin_right = 1006.0
+margin_bottom = 356.0
 focus_mode = 2
 size_flags_horizontal = 3
 custom_constants/line_separation = 5
@@ -266,6 +289,7 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
+[connection signal="meta_clicked" from="SC/VBox/HBox1/BDesc" to="." method="_on_Desc_meta_clicked"]
 [connection signal="pressed" from="SC/VBox/HBox1/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="SC/VBox/HBox2/NotesButton" to="." method="_on_NotesButton_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/Desc" to="." method="_on_Desc_meta_clicked"]

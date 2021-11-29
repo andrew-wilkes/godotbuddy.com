@@ -44,7 +44,7 @@ func update_content(cname, new = true):
 
 	var info = get_info(cname)
 	find_node("ClassName").text = cname
-	find_node("BDesc").text = info.brief_description
+	find_node("BDesc").bbcode_text = text_to_bbcode(info.brief_description)
 	desc.bbcode_text = text_to_bbcode(info.description)
 	call_deferred("set_description_scroll_container_size")
 
@@ -58,7 +58,7 @@ func set_description_scroll_container_size():
 		first_run = false
 		# RichTextLabel does not resize on first run if child of scroll container
 		desc.get_parent().remove_child(desc)
-		descbox.get_child(0).add_child(desc)
+		descbox.get_child(0).get_child(0).add_child(desc)
 	# Make RichTextLabel shrink to fit content
 	desc.rect_size.y = 0
 	# Set min size of scroll container based on desc size.y
@@ -204,7 +204,7 @@ func add_links(txt: String):
 func _on_Desc_meta_clicked(meta):
 	meta = String(meta)
 	if meta.begins_with("http"):
-		OS.shell_open(str(meta))
+		var _e = OS.shell_open(str(meta))
 	else:
 		update_content(meta)
 
