@@ -202,8 +202,11 @@ func add_links(txt: String):
 
 
 func _on_Desc_meta_clicked(meta):
-	desc.rect_min_size.y = 0
-	update_content(meta)
+	meta = String(meta)
+	if meta.begins_with("http"):
+		OS.shell_open(str(meta))
+	else:
+		update_content(meta)
 
 
 func _on_Description_pressed():
