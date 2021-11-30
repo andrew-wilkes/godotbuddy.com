@@ -14,6 +14,15 @@ var first_run = true
 var history = []
 var stepping_back = false
 var back_button
+var tab_list = [
+	"methods",
+	"members",
+	"signals",
+	"constants",
+	"tutorials",
+	"theme_items",
+]
+var tabs
 
 func _ready():
 	desc = find_node("Desc")
@@ -22,6 +31,7 @@ func _ready():
 	desc_button = find_node("DescButton")
 	notes_button = find_node("NotesButton")
 	back_button = find_node("BackButton")
+	tabs = find_node("TabContainer")
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
@@ -47,10 +57,29 @@ func update_content(cname, new = true):
 	find_node("BDesc").bbcode_text = text_to_bbcode(info.brief_description)
 	desc.bbcode_text = text_to_bbcode(info.description)
 	call_deferred("set_description_scroll_container_size")
+	
+	# Set up tabs
+	var remove = false
+	for tab in tabs.get_children():
+		if remove:
+			# Avoid problem of duplicate names
+			tab.name = "x"
+			tab.queue_free()
+		remove = true
+	var add = false
+	for key in tab_list:
+		if info.has(key):
+			var items = info[key]
+			var tab = tabs.get_child(0)
+			if add:
+				tab = tab.duplicate()
+				tabs.add_child(tab)
+			tab.name = key.capitalize()
+			add = true
 
 
 func set_back_button_state():
-		back_button.disabled = true if history.size() < 1 else false
+	back_button.disabled = true if history.size() < 1 else false
 
 
 func set_description_scroll_container_size():
@@ -66,7 +95,7 @@ func set_description_scroll_container_size():
 	scroll_container.rect_min_size.y = min(desc.rect_size.y, max_description_size_y)
 
 
-func get_info(cname):
+func get_info(cname) -> Dictionary:
 	var info = {}
 	var node_name = ""
 	var group_name = ""
@@ -109,12 +138,14 @@ func get_info(cname):
 								"qualifiers": parser.get_named_attribute_value_safe("qualifiers"),
 								"args": {},
 								"return_type": "",
+								"description": "",
 							}
 							if info[group_name].has(method_name):
 								info[group_name][method_name].append(method)
 							else:
 								info[group_name][method_name] = [method]
 							method_target = method
+							text_target = method
 							text_mode = RAW
 						"return":
 							method_target["return_type"] = parser.get_named_attribute_value("type")
@@ -122,8 +153,8 @@ func get_info(cname):
 							var keys = ["index", "type", "default"]
 							var _member_name = add_argument(parser, method_target, keys)
 						"members":
-							info[node_name] = {}
-							group_name = node_name
+							info["properties"] = {}
+							group_name = "properties"
 						"member":
 							var keys = ["type", "setter", "getter", "default"]
 							member_name = add_member(parser, info, group_name, keys)
@@ -151,10 +182,13 @@ func get_info(cname):
 				parser.NODE_TEXT:
 					if text_target != null:
 						var txt = get_node_text(parser.get_node_data())
-						if text_mode == FORMATTED:
-							txt = format_text(txt)
-						text_target[text_node_name] = txt
-						text_target = null
+						# We get unexpected blank text nodes, so ignore them
+						if txt.length() > 0:
+							if text_mode == FORMATTED:
+								txt = format_text(txt)
+							text_target[text_node_name] = txt
+							text_target = null
+	return info
 
 
 func add_member(parser: XMLParser, info: Dictionary, group_name, keys: Array) -> String:

@@ -62,6 +62,7 @@ func load_settings(file_name = SETTINGS_FILE_NAME):
 
 func save_settings(_settings, file_name = SETTINGS_FILE_NAME):
 	assert(ResourceSaver.save(file_name, _settings) == OK)
+	settings_changed = false
 
 
 func _notification(what):
