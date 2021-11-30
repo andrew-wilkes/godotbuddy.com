@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://class_item.gd"
 }, {
+"base": "RichTextLabel",
+"class": "RichContent",
+"language": "GDScript",
+"path": "res://ContentRichTextLabel.gd"
+}, {
 "base": "Resource",
 "class": "Settings",
 "language": "GDScript",
@@ -21,6 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "ClassItem": "",
+"RichContent": "",
 "Settings": ""
 }
 

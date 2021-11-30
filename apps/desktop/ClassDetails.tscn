@@ -22,7 +22,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-code_color = Color( 0, 0.65098, 1, 1 )
 
 [node name="SC" type="ScrollContainer" parent="."]
 margin_left = 9.0
@@ -264,4 +263,5 @@ margin_bottom = 384.0
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
 [connection signal="pressed" from="SC/VBox/HBox1/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="SC/VBox/HBox2/NotesButton" to="." method="_on_NotesButton_pressed"]
-[connection signal="meta_clicked" from="SC/VBox/Desc" to="." method="_on_Desc_meta_clicked"]
+[connection signal="meta_clicked" from="SC/VBox/TabContainer/Methods" to="." method="_on_meta_clicked"]
+[connection signal="meta_clicked" from="SC/VBox/Desc" to="." method="_on_meta_clicked"]

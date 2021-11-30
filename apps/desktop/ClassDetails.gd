@@ -2,7 +2,6 @@ extends Control
 
 enum { RAW, FORMATTED }
 
-export(Color) var code_color = Color(255, 155, 0)
 export(int) var max_description_size_y = 400
 
 var desc: RichTextLabel
@@ -54,8 +53,8 @@ func update_content(cname, new = true):
 
 	var info = get_info(cname)
 	find_node("ClassName").text = cname
-	find_node("BDesc").bbcode_text = text_to_bbcode(info.brief_description)
-	desc.bbcode_text = text_to_bbcode(info.description)
+	find_node("BDesc").set_content(info.brief_description)
+	desc.set_content(info.description)
 	call_deferred("set_description_scroll_container_size")
 	
 	# Set up tabs
@@ -69,13 +68,20 @@ func update_content(cname, new = true):
 	var add = false
 	for key in tab_list:
 		if info.has(key):
-			var items = info[key]
 			var tab = tabs.get_child(0)
 			if add:
 				tab = tab.duplicate()
 				tabs.add_child(tab)
 			tab.name = key.capitalize()
 			add = true
+			add_items_to_tab(tab, info[key])
+
+
+func add_items_to_tab(tab: RichContent, items):
+	var content = PoolStringArray([])
+	for key in items.keys():
+		content.append(key)
+	tab.set_content(content.join("\n"))
 
 
 func set_back_button_state():
@@ -216,26 +222,7 @@ func format_text(txt):
 	return txt.replace("[", "").replace("]", "")
 
 
-func text_to_bbcode(txt: String):
-	txt = add_links(txt)
-	return txt.c_unescape() \
-	.replace("codeblock]", "code]") \
-	.replace("[code]", "[code][color=#" + code_color.to_html(false) + "]") \
-	.replace("[/code]", "[/color][/code]")
-
-
-func add_links(txt: String):
-	var regex = RegEx.new()
-	regex.compile("\\[([A-Z]\\w+)\\]")
-	for result in regex.search_all(txt):
-		var cname = result.get_string(1)
-		var link = "[url=%s]%s[/url]" % [cname, cname]
-		var target = result.get_string(0)
-		txt = txt.replace(target, link)
-	return txt
-
-
-func _on_Desc_meta_clicked(meta):
+func _on_meta_clicked(meta):
 	meta = String(meta)
 	if meta.begins_with("http"):
 		var _e = OS.shell_open(str(meta))
