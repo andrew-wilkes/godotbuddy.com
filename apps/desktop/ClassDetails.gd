@@ -34,8 +34,8 @@ func _ready():
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
-	#update_content("CollisionObject2D")
-	update_content("File")
+	update_content("CollisionObject2D")
+	#update_content("File")
 
 
 func update_content(cname, new = true):
@@ -92,10 +92,29 @@ func add_items_to_tab(prop, tab: RichContent, items):
 				content.append(get_property_string(key, items[key]))
 			content.append("[/table]")
 		"signals":
-			for key in items.keys():
-				content.append(key + " (" + get_args(items[key].args) + ")\n[indent]" + items[key].description + "[/indent]\n")
+			for item in items:
+				content.append(item.name + " (" + get_args(item.args) + ")\n[indent]" + item.description + "[/indent]\n")
 		"constants":
-			pass
+			var enums = {}
+			for item in items:
+				var args = item.args[0]
+				args.description = item.description
+				if args.has("enum"):
+					if enums.has(args.enum):
+						enums[args.enum].append(args)
+					else:
+						enums[args.enum] = [args]
+				else: # Constant
+					content.append(args.name + " = " + args.value + " " + item.description)
+			for ename in enums.keys():
+				content.append("[code]enum[/code]\t" + ename)
+				var vals = {}
+				for item in enums[ename]:
+					vals[item.value] = item
+				var keys = vals.keys()
+				keys.sort()
+				for key in keys:
+					content.append(vals[key].name + " = " + vals[key].value + " " + vals[key].description)
 		"tutorials":
 			for link in items:
 				content.append(get_link_string(link))
@@ -177,7 +196,7 @@ func get_info(cname) -> Dictionary:
 	var group_name = ""
 	var member_name = ""
 	var text_target
-	var method_target
+	var dict_target
 	var text_node_name
 	var text_mode
 	var parser = XMLParser.new()
@@ -224,13 +243,13 @@ func get_info(cname) -> Dictionary:
 								info[group_name][method_name].append(method)
 							else:
 								info[group_name][method_name] = [method]
-							method_target = method
+							dict_target = method
 							text_target = method
 							text_mode = RAW
 						"return":
-							method_target["return_type"] = get_type(parser)
+							dict_target["return_type"] = get_type(parser)
 						"argument":
-							add_arg(parser, method_target)
+							add_arg(parser, dict_target)
 						"members":
 							info["properties"] = {}
 							group_name = "properties"
@@ -240,25 +259,29 @@ func get_info(cname) -> Dictionary:
 							text_target = info[group_name][member_name]
 							text_mode = RAW
 						"signals":
-							info[node_name] = {}
+							info[node_name] = []
 							group_name = node_name
 						"signal":
-							member_name = parser.get_named_attribute_value("name")
-							var asignal = {
+							var dict = {
+								"name": parser.get_named_attribute_value("name"),
 								"args": [],
 							}
-							info[group_name][member_name] = asignal
-							text_target = info[group_name][member_name]
+							info[group_name].append(dict)
+							text_target = dict
 							text_mode = RAW
-							method_target = asignal
+							dict_target = dict
 						"constants":
-							info[node_name] = {}
+							info[node_name] = []
 							group_name = node_name
 						"constant":
-							var keys = ["value", "enum"]
-							member_name = add_member(parser, info, group_name, keys)
-							text_target = info[group_name][member_name]
+							var dict = {
+								"args": [],
+							}
+							info[group_name].append(dict)
+							text_target = dict
 							text_mode = RAW
+							dict_target = dict
+							add_arg(parser, dict_target)
 				parser.NODE_TEXT:
 					if text_target != null:
 						var txt = get_node_text(parser.get_node_data())
@@ -288,12 +311,12 @@ func add_member(parser: XMLParser, info: Dictionary, group_name, keys: Array) ->
 	return member_name
 
 
-func add_arg(parser: XMLParser, method_target):
+func add_arg(parser: XMLParser, dict_target):
 	var num_atrs = parser.get_attribute_count()
 	var atrs = {}
 	for idx in num_atrs:
 		atrs[parser.get_attribute_name(idx)] = parser.get_attribute_value(idx)
-	method_target["args"].append(atrs)
+	dict_target["args"].append(atrs)
 
 
 func get_node_text(txt: String):
