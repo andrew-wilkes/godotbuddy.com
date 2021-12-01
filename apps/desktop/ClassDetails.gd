@@ -34,8 +34,9 @@ func _ready():
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
-	update_content("CollisionObject2D")
+	#update_content("CollisionObject2D")
 	#update_content("File")
+	update_content("String")
 
 
 func update_content(cname, new = true):
@@ -151,8 +152,11 @@ func get_default_property_value(item: Dictionary):
 	return "[default: %s]" % [ds] if ds.length() > 0 else ""
 
 
-func get_return_type_string(type):
+func get_return_type_string(type: String):
+	if type.length() == 0:
+		type = "void"
 	return "[" + type + "]" if type != "void" else type
+
 
 func get_args(args: Array):
 	var astr = PoolStringArray([])
