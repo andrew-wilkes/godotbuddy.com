@@ -34,7 +34,8 @@ func _ready():
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
-	update_content("Button")
+	#update_content("CollisionObject2D")
+	update_content("File")
 
 
 func update_content(cname, new = true):
@@ -90,7 +91,27 @@ func add_items_to_tab(prop, tab: RichContent, items):
 			for key in items.keys():
 				content.append(get_property_string(key, items[key]))
 			content.append("[/table]")
+		"signals":
+			for key in items.keys():
+				content.append(key + " (" + get_args(items[key].args) + ")\n[indent]" + items[key].description + "[/indent]\n")
+		"constants":
+			pass
+		"tutorials":
+			for link in items:
+				content.append(get_link_string(link))
+		"theme_items":
+			pass
 	tab.set_content(content.join("\n"))
+
+
+func get_link_string(link):
+	if link.title == "":
+		link.title = link.url
+	return "[url=%s]%s[/url]" % [link.url, link.title]
+
+
+func get_signal_string(sname, attribs):
+	return "[cell]%s (%s)[/cell]" % [sname, get_args(attribs.args)]
 
 
 func get_property_string(pname, attribs: Dictionary):
@@ -178,11 +199,15 @@ func get_info(cname) -> Dictionary:
 								text_target = info
 								text_node_name = node_name
 						"tutorials":
-							info[node_name] = {}
+							info[node_name] = []
 							group_name = node_name
 						"link":
-							text_node_name = parser.get_named_attribute_value_safe("title")
-							text_target = info[group_name]
+							var link = {
+								"title": parser.get_named_attribute_value_safe("title")
+							}
+							info[group_name].append(link)
+							text_target = link
+							text_node_name = "url"
 						"methods":
 							info[node_name] = {} # Methods may have the same name
 							group_name = node_name
@@ -220,11 +245,12 @@ func get_info(cname) -> Dictionary:
 						"signal":
 							member_name = parser.get_named_attribute_value("name")
 							var asignal = {
-								"args": {},
+								"args": [],
 							}
 							info[group_name][member_name] = asignal
 							text_target = info[group_name][member_name]
 							text_mode = RAW
+							method_target = asignal
 						"constants":
 							info[node_name] = {}
 							group_name = node_name
