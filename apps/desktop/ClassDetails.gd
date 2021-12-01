@@ -69,7 +69,7 @@ func update_content(cname, new = true):
 	var add = false
 	var tab = tabs.get_child(0)
 	for key in tab_list:
-		if info.has(key):
+		if info.has(key) and not info[key].empty():
 			if add:
 				tab = tab.duplicate()
 				tabs.add_child(tab)
