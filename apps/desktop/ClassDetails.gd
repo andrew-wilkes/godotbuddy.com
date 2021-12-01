@@ -74,14 +74,47 @@ func update_content(cname, new = true):
 				tabs.add_child(tab)
 			tab.name = key.capitalize()
 			add = true
-			add_items_to_tab(tab, info[key])
+			add_items_to_tab(key, tab, info[key])
 
 
-func add_items_to_tab(tab: RichContent, items):
+func add_items_to_tab(prop, tab: RichContent, items):
 	var content = PoolStringArray([])
-	for key in items.keys():
-		content.append(key)
+	match prop:
+		"methods":
+			content.append("[table=2]")
+			for key in items.keys():
+				content.append(get_method_string(key, items[key]))
+			content.append("[/table]")
 	tab.set_content(content.join("\n"))
+
+
+func get_method_string(mname, items):
+	var ms = PoolStringArray([])
+	for item in items:
+		ms.append("[cell][right]%s[/right]\t[/cell][cell]%s(%s) %s[/cell]" % [get_return_type_string(item.return_type), mname, get_args(item.args), item.qualifiers])
+	return ms.join("\n")
+
+
+func get_return_type_string(type):
+	return "[" + type + "]" if type != "void" else type
+
+func get_args(args: Array):
+	var astr = PoolStringArray([])
+	var dict = {}
+	for arg in args:
+		dict[arg.index] = arg
+	var keys = dict.keys()
+	keys.sort()
+	for key in keys:
+		astr.append("%s: [%s]%s" % [dict[key].name, dict[key].type, get_default_arg_value(dict[key])])
+	return astr.join(", ")
+
+
+func get_default_arg_value(arg: Dictionary):
+	if arg.has("default"):
+		return " = " + arg["default"]
+	else:
+		return ""
 
 
 func set_back_button_state():
@@ -142,7 +175,7 @@ func get_info(cname) -> Dictionary:
 							var method_name = parser.get_named_attribute_value("name")
 							var method = {
 								"qualifiers": parser.get_named_attribute_value_safe("qualifiers"),
-								"args": {},
+								"args": [],
 								"return_type": "",
 								"description": "",
 							}
@@ -154,10 +187,9 @@ func get_info(cname) -> Dictionary:
 							text_target = method
 							text_mode = RAW
 						"return":
-							method_target["return_type"] = parser.get_named_attribute_value("type")
+							method_target["return_type"] = get_type(parser)
 						"argument":
-							var keys = ["index", "type", "default"]
-							var _member_name = add_argument(parser, method_target, keys)
+							add_arg(parser, method_target)
 						"members":
 							info["properties"] = {}
 							group_name = "properties"
@@ -191,10 +223,18 @@ func get_info(cname) -> Dictionary:
 						# We get unexpected blank text nodes, so ignore them
 						if txt.length() > 0:
 							if text_mode == FORMATTED:
-								txt = format_text(txt)
+								txt = remove_square_braces(txt)
 							text_target[text_node_name] = txt
 							text_target = null
 	return info
+
+
+func get_type(parser):
+	var _type = parser.get_named_attribute_value("type")
+	var _enum = parser.get_named_attribute_value_safe("enum")
+	if _enum.length() > 0:
+		_type = _enum
+	return _type
 
 
 func add_member(parser: XMLParser, info: Dictionary, group_name, keys: Array) -> String:
@@ -206,19 +246,19 @@ func add_member(parser: XMLParser, info: Dictionary, group_name, keys: Array) ->
 	return member_name
 
 
-func add_argument(parser: XMLParser, method_target, keys: Array):
-	var arg_name = parser.get_named_attribute_value("name")
-	var arg = {}
-	for key in keys:
-		arg[key] = parser.get_named_attribute_value_safe(key)
-	method_target["args"][arg_name] = arg
+func add_arg(parser: XMLParser, method_target):
+	var num_atrs = parser.get_attribute_count()
+	var atrs = {}
+	for idx in num_atrs:
+		atrs[parser.get_attribute_name(idx)] = parser.get_attribute_value(idx)
+	method_target["args"].append(atrs)
 
 
 func get_node_text(txt: String):
 	return txt.lstrip("\n\t ").rstrip("\n\t ").replace("\t", "")
 
 
-func format_text(txt):
+func remove_square_braces(txt):
 	return txt.replace("[", "").replace("]", "")
 
 
