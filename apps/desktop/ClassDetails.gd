@@ -15,7 +15,7 @@ var stepping_back = false
 var back_button
 var tab_list = [
 	"methods",
-	"members",
+	"properties",
 	"signals",
 	"constants",
 	"tutorials",
@@ -34,7 +34,7 @@ func _ready():
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
-	update_content("File")
+	update_content("Button")
 
 
 func update_content(cname, new = true):
@@ -85,7 +85,18 @@ func add_items_to_tab(prop, tab: RichContent, items):
 			for key in items.keys():
 				content.append(get_method_string(key, items[key]))
 			content.append("[/table]")
+		"properties":
+			content.append("[table=2]")
+			for key in items.keys():
+				content.append(get_property_string(key, items[key]))
+			content.append("[/table]")
 	tab.set_content(content.join("\n"))
+
+
+func get_property_string(pname, attribs: Dictionary):
+	var ps = PoolStringArray([])
+	ps.append("[cell][right]%s[/right]\t[/cell][cell]%s %s[/cell]" % [get_return_type_string(attribs.type), pname, get_default_property_value(attribs)])
+	return ps.join("\n")
 
 
 func get_method_string(mname, items):
@@ -93,6 +104,11 @@ func get_method_string(mname, items):
 	for item in items:
 		ms.append("[cell][right]%s[/right]\t[/cell][cell]%s(%s) %s[/cell]" % [get_return_type_string(item.return_type), mname, get_args(item.args), item.qualifiers])
 	return ms.join("\n")
+
+
+func get_default_property_value(item: Dictionary):
+	var ds = item.get("default", "")
+	return "[default: %s]" % [ds] if ds.length() > 0 else ""
 
 
 func get_return_type_string(type):
