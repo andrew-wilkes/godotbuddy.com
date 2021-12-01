@@ -66,9 +66,9 @@ func update_content(cname, new = true):
 			tab.queue_free()
 		remove = true
 	var add = false
+	var tab = tabs.get_child(0)
 	for key in tab_list:
 		if info.has(key):
-			var tab = tabs.get_child(0)
 			if add:
 				tab = tab.duplicate()
 				tabs.add_child(tab)
