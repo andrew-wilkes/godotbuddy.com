@@ -2,8 +2,6 @@ extends Control
 
 enum { RAW, FORMATTED }
 
-export(int) var max_description_size_y = 400
-
 var desc: RichTextLabel
 var descbox
 var notes
@@ -57,7 +55,7 @@ func update_content(cname, new = true):
 	find_node("ClassName").text = cname
 	find_node("BDesc").set_content(info.brief_description)
 	desc.set_content(info.description)
-	call_deferred("set_description_container_size")
+	#call_deferred("set_description_container_size")
 	
 	# Set up tabs
 	var remove = false
@@ -179,22 +177,6 @@ func get_default_arg_value(arg: Dictionary):
 
 func set_back_button_state():
 	back_button.disabled = true if history.size() < 1 else false
-
-
-func set_description_container_size():
-	if first_run:
-		first_run = false
-		# RichTextLabel does not resize on first run if child of scroll container
-		desc.get_parent().remove_child(desc)
-		descbox.get_child(0).get_child(0).add_child(desc)
-	# Make RichTextLabel shrink to fit content
-	desc.rect_size.y = 0
-	set_desc_hbox_size()
-	call_deferred("set_desc_hbox_size")
-
-func set_desc_hbox_size():
-	var hbox = descbox.get_child(0)
-	hbox.rect_min_size.y = min(desc.rect_size.y, max_description_size_y)
 
 
 func get_info(cname) -> Dictionary:
@@ -345,7 +327,6 @@ func _on_meta_clicked(meta):
 func _on_Description_pressed():
 	descbox.visible = not descbox.visible
 	desc_button.text = "-" if descbox.visible else "+"
-	call_deferred("set_desc_hbox_size")
 
 
 func _on_NotesButton_pressed():

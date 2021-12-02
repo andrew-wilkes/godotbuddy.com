@@ -128,34 +128,34 @@ rect_min_size = Vector2( 0, 10 )
 [node name="DescBox" type="VBoxContainer" parent="SC/VBox"]
 margin_top = 102.0
 margin_right = 1006.0
-margin_bottom = 116.0
+margin_bottom = 144.0
 size_flags_horizontal = 3
 
 [node name="HBox" type="HBoxContainer" parent="SC/VBox/DescBox"]
 margin_right = 1006.0
+margin_bottom = 28.0
 
-[node name="SC" type="ScrollContainer" parent="SC/VBox/DescBox/HBox"]
+[node name="Desc" parent="SC/VBox/DescBox/HBox" instance=ExtResource( 5 )]
+margin_top = 0.0
 margin_right = 982.0
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_bottom = 28.0
 
 [node name="Sp" type="Control" parent="SC/VBox/DescBox/HBox"]
 margin_left = 986.0
 margin_right = 1006.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="Sp2" type="Control" parent="SC/VBox/DescBox"]
-margin_top = 4.0
+margin_top = 32.0
 margin_right = 1006.0
-margin_bottom = 14.0
+margin_bottom = 42.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox2" type="HBoxContainer" parent="SC/VBox"]
-margin_top = 120.0
+margin_top = 148.0
 margin_right = 1006.0
-margin_bottom = 140.0
+margin_bottom = 168.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
@@ -181,15 +181,15 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="Sp3" type="Control" parent="SC/VBox"]
-margin_top = 144.0
+margin_top = 172.0
 margin_right = 1006.0
-margin_bottom = 154.0
+margin_bottom = 182.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="NotesBox" type="VBoxContainer" parent="SC/VBox"]
-margin_top = 158.0
+margin_top = 186.0
 margin_right = 1006.0
-margin_bottom = 272.0
+margin_bottom = 300.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -222,9 +222,9 @@ margin_bottom = 114.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="TabContainer" type="TabContainer" parent="SC/VBox"]
-margin_top = 276.0
+margin_top = 304.0
 margin_right = 1006.0
-margin_bottom = 352.0
+margin_bottom = 380.0
 custom_fonts/font = SubResource( 1 )
 tab_align = 0
 
@@ -256,12 +256,8 @@ margin_top = 44.0
 visible = false
 margin_top = 44.0
 
-[node name="Desc" parent="SC/VBox" instance=ExtResource( 5 )]
-margin_top = 356.0
-margin_bottom = 384.0
-
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
 [connection signal="pressed" from="SC/VBox/HBox1/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="meta_clicked" from="SC/VBox/DescBox/HBox/Desc" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/VBox/HBox2/NotesButton" to="." method="_on_NotesButton_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/TabContainer/Methods" to="." method="_on_meta_clicked"]
-[connection signal="meta_clicked" from="SC/VBox/Desc" to="." method="_on_meta_clicked"]
