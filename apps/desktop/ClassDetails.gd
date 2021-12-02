@@ -7,7 +7,6 @@ var descbox
 var notes
 var desc_button
 var notes_button
-var first_run = true
 var history = []
 var stepping_back = false
 var back_button
@@ -35,7 +34,8 @@ func _ready():
 	#update_content("CollisionObject2D")
 	#update_content("File")
 	#update_content("String")
-	update_content("Button")
+	#update_content("Button")
+	update_content("Array")
 
 
 func update_content(cname, new = true):
@@ -56,8 +56,7 @@ func update_content(cname, new = true):
 	find_node("ClassName").text = cname
 	find_node("BDesc").set_content(info.brief_description)
 	desc.set_content(info.description)
-	#call_deferred("set_description_container_size")
-	
+
 	# Set up tabs
 	var remove = false
 	for tab in tabs.get_children():

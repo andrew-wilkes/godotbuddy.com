@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ClassDetails.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/boldheader.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/OpenSans-Bold.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://ClassInfoCard.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ContentRichTextLabel.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
@@ -241,26 +240,6 @@ margin_left = 4.0
 margin_top = 44.0
 margin_right = -4.0
 margin_bottom = -4.0
-
-[node name="Properties" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
-visible = false
-margin_top = 44.0
-
-[node name="Signals" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
-visible = false
-margin_top = 44.0
-
-[node name="Constants" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
-visible = false
-margin_top = 44.0
-
-[node name="Tutorials" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
-visible = false
-margin_top = 44.0
-
-[node name="Theme Items" parent="SC/VBox/TabContainer" instance=ExtResource( 4 )]
-visible = false
-margin_top = 44.0
 
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
 [connection signal="pressed" from="SC/VBox/HBox1/BackButton" to="." method="_on_BackButton_pressed"]
