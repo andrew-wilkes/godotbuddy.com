@@ -32,9 +32,9 @@ func _ready():
 	descbox.hide()
 	notes.get_parent().hide()
 	#update_content("CollisionObject2D")
-	update_content("File")
+	#update_content("File")
 	#update_content("String")
-	#update_content("Button")
+	update_content("BaseButton")
 	#update_content("Array")
 
 
@@ -88,14 +88,20 @@ func add_items_to_tab(prop, tab: RichContent, items):
 				content.append(mstrs[0])
 				descriptions.append(mstrs[1])
 			content.append("[/table]\n")
-			content.append("Method Descriptions")
+			content.append("Method Descriptions\n")
 			for d in descriptions:
 				content.append(d)
 		"properties":
 			content.append("[table=2]")
+			var descriptions = []
 			for key in items.keys():
-				content.append(get_property_string(key, items[key]))
-			content.append("[/table]")
+				var pstrs = get_property_strings(key, items[key])
+				content.append(pstrs[0])
+				descriptions.append(pstrs[1])
+			content.append("[/table]\n")
+			content.append("Property Descriptions\n")
+			for d in descriptions:
+				content.append(d)
 		"theme_items":
 			content.append("[table=2]")
 			for item in items:
@@ -127,7 +133,7 @@ func add_items_to_tab(prop, tab: RichContent, items):
 					content.append("\t\u2022 " + vals[key].name + " = " + vals[key].value + " - " + vals[key].description + "\n")
 		"tutorials":
 			for link in items:
-				content.append(get_link_string(link))
+				content.append("\t" + get_link_string(link))
 	tab.set_content(content.join("\n"))
 
 
@@ -139,17 +145,18 @@ func get_link_string(link):
 
 func get_theme_item_string(attribs: Dictionary):
 	var args = attribs.args[0]
-	return "[cell][right]%s[/right]\t[/cell][cell]%s %s %s[/cell]" %  [get_return_type_string(args.type), args.name, get_default_property_value(args), attribs.get("description", "")]
+	return "[cell][right]%s[/right]\t[/cell][cell]%s %s\t%s[/cell]" %  [get_return_type_string(args.type), args.name, get_default_property_value(args), attribs.get("description", "")]
 
 
 func get_signal_string(sname, attribs):
 	return "[cell]%s (%s)[/cell]" % [sname, get_args(attribs.args)]
 
 
-func get_property_string(pname, attribs: Dictionary):
-	var ps = PoolStringArray([])
-	ps.append("[cell][right]%s[/right]\t[/cell][cell]%s %s[/cell]" % [get_return_type_string(attribs.type), pname, get_default_property_value(attribs)])
-	return ps.join("\n")
+func get_property_strings(pname, attribs: Dictionary):
+	var type = get_return_type_string(attribs.type)
+	var ps = "[cell][right]%s[/right]\t[/cell][cell]%s %s[/cell]" % [type, pname, get_default_property_value(attribs)]
+	var pds = "\u2022 %s %s %s\n\t%s setter\n\t%s getter\n" % [type, pname, get_default_property_value(attribs), attribs.setter, attribs.getter]
+	return [ps, pds]
 
 
 func get_method_strings(mname, attribs):
