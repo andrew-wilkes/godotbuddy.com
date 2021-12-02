@@ -34,7 +34,8 @@ func _ready():
 	notes.get_parent().hide()
 	#update_content("CollisionObject2D")
 	#update_content("File")
-	update_content("String")
+	#update_content("String")
+	update_content("Button")
 
 
 func update_content(cname, new = true):
@@ -90,6 +91,11 @@ func add_items_to_tab(prop, tab: RichContent, items):
 			for key in items.keys():
 				content.append(get_property_string(key, items[key]))
 			content.append("[/table]")
+		"theme_items":
+			content.append("[table=2]")
+			for item in items:
+				content.append(get_theme_item_string(item))
+			content.append("[/table]")
 		"signals":
 			for item in items:
 				content.append(item.name + " (" + get_args(item.args) + ")\n[indent]" + item.description + "[/indent]\n")
@@ -117,8 +123,6 @@ func add_items_to_tab(prop, tab: RichContent, items):
 		"tutorials":
 			for link in items:
 				content.append(get_link_string(link))
-		"theme_items":
-			pass
 	tab.set_content(content.join("\n"))
 
 
@@ -126,6 +130,11 @@ func get_link_string(link):
 	if link.title == "":
 		link.title = link.url
 	return "[url=%s]%s[/url]" % [link.url, link.title]
+
+
+func get_theme_item_string(attribs: Dictionary):
+	var args = attribs.args[0]
+	return "[cell][right]%s[/right]\t[/cell][cell]%s %s %s[/cell]" %  [get_return_type_string(args.type), args.name, get_default_property_value(args), attribs.get("description", "")]
 
 
 func get_signal_string(sname, attribs):
@@ -247,6 +256,18 @@ func get_info(cname) -> Dictionary:
 							member_name = add_member(parser, info, group_name, keys)
 							text_target = info[group_name][member_name]
 							text_mode = RAW
+						"theme_items":
+							info[node_name] = []
+							group_name = node_name
+						"theme_item":
+							var dict = {
+								"args": [],
+							}
+							add_arg(parser, dict)
+							info[group_name].append(dict)
+							text_target = dict
+							text_mode = RAW
+							dict_target = dict
 						"signals":
 							info[node_name] = []
 							group_name = node_name
