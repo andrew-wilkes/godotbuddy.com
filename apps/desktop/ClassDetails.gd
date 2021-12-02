@@ -353,9 +353,11 @@ func remove_square_braces(txt):
 
 
 func _on_meta_clicked(meta):
-	meta = String(meta)
-	if meta.begins_with("http"):
+	var url = String(meta).split(" ")
+	if url[0].begins_with("http"):
 		var _e = OS.shell_open(str(meta))
+	elif url.size() == 2:
+		pass # goto tab and specific item
 	else:
 		update_content(meta)
 		$SC.scroll_vertical = 0

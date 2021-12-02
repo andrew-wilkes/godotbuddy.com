@@ -14,10 +14,15 @@ func set_content(txt: String):
 
 func add_links(txt: String):
 	var regex = RegEx.new()
-	regex.compile("\\[([A-Z]\\w+|bool|float|int)\\]")
+	regex.compile("\\[([A-Z]\\w+|bool|float|int|(\\w+ (\\w+)))\\]")
 	for result in regex.search_all(txt):
-		var cname = result.get_string(1)
-		var link = "[url=%s]%s[/url]" % [cname, cname]
+		var url = result.get_string(1)
+		var link_text = url
+		var goto = result.get_string(2)
+		if goto.length() > 0:
+			url = goto
+			link_text = result.get_string(3)
+		var link = "[url=%s]%s[/url]" % [url, link_text]
 		var target = result.get_string(0)
 		txt = txt.replace(target, link)
 	return txt
