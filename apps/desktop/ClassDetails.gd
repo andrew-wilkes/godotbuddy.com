@@ -322,6 +322,7 @@ func _on_meta_clicked(meta):
 		var _e = OS.shell_open(str(meta))
 	else:
 		update_content(meta)
+		$SC.scroll_vertical = 0
 
 
 func _on_Description_pressed():

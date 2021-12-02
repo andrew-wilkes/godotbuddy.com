@@ -36,4 +36,4 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-code_color = Color( 0, 0.435294, 1, 1 )
+code_color = Color( 0, 0.741176, 1, 1 )

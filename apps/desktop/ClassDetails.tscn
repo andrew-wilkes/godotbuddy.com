@@ -31,7 +31,7 @@ margin_bottom = 591.0
 
 [node name="VBox" type="VBoxContainer" parent="SC"]
 margin_right = 1006.0
-margin_bottom = 384.0
+margin_bottom = 380.0
 rect_min_size = Vector2( 720, 0 )
 size_flags_horizontal = 3
 
@@ -109,15 +109,21 @@ text = "+"
 [node name="BDesc" parent="SC/VBox/HBox1" instance=ExtResource( 5 )]
 margin_left = 28.0
 margin_top = 0.0
-margin_right = 978.0
+margin_right = 960.0
 margin_bottom = 28.0
 
 [node name="BackButton" type="Button" parent="SC/VBox/HBox1"]
-margin_left = 986.0
-margin_right = 1006.0
+margin_left = 968.0
+margin_right = 988.0
 margin_bottom = 28.0
 hint_tooltip = "Go to previous class"
 text = "<"
+
+[node name="Sp" type="Control" parent="SC/VBox/HBox1"]
+margin_left = 996.0
+margin_right = 1006.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 10, 0 )
 
 [node name="Sp2" type="Control" parent="SC/VBox"]
 margin_top = 88.0
