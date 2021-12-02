@@ -32,10 +32,10 @@ func _ready():
 	descbox.hide()
 	notes.get_parent().hide()
 	#update_content("CollisionObject2D")
-	#update_content("File")
+	update_content("File")
 	#update_content("String")
 	#update_content("Button")
-	update_content("Array")
+	#update_content("Array")
 
 
 func update_content(cname, new = true):
@@ -82,9 +82,15 @@ func add_items_to_tab(prop, tab: RichContent, items):
 	match prop:
 		"methods":
 			content.append("[table=2]")
+			var descriptions = []
 			for key in items.keys():
-				content.append(get_method_string(key, items[key]))
-			content.append("[/table]")
+				var mstrs = get_method_strings(key, items[key])
+				content.append(mstrs[0])
+				descriptions.append(mstrs[1])
+			content.append("[/table]\n")
+			content.append("Method Descriptions")
+			for d in descriptions:
+				content.append(d)
 		"properties":
 			content.append("[table=2]")
 			for key in items.keys():
@@ -109,7 +115,7 @@ func add_items_to_tab(prop, tab: RichContent, items):
 					else:
 						enums[args.enum] = [args]
 				else: # Constant
-					content.append(args.name + " = " + args.value + " " + item.description)
+					content.append("\u2022 " + args.name + " = " + args.value + " - " + item.description)
 			for ename in enums.keys():
 				content.append("[code]enum[/code]\t" + ename)
 				var vals = {}
@@ -118,7 +124,7 @@ func add_items_to_tab(prop, tab: RichContent, items):
 				var keys = vals.keys()
 				keys.sort()
 				for key in keys:
-					content.append(vals[key].name + " = " + vals[key].value + " " + vals[key].description)
+					content.append("\t\u2022 " + vals[key].name + " = " + vals[key].value + " - " + vals[key].description + "\n")
 		"tutorials":
 			for link in items:
 				content.append(get_link_string(link))
@@ -146,11 +152,14 @@ func get_property_string(pname, attribs: Dictionary):
 	return ps.join("\n")
 
 
-func get_method_string(mname, items):
+func get_method_strings(mname, attribs):
 	var ms = PoolStringArray([])
-	for item in items:
-		ms.append("[cell][right]%s[/right]\t[/cell][cell]%s(%s) %s[/cell]" % [get_return_type_string(item.return_type), mname, get_args(item.args), item.qualifiers])
-	return ms.join("\n")
+	var mds = PoolStringArray([])
+	for attrib in attribs:
+		var ret_type = get_return_type_string(attrib.return_type)
+		ms.append("[cell][right]%s[/right]\t[/cell][cell]%s(%s) %s[/cell]" % [ret_type, mname, get_args(attrib.args), attrib.qualifiers])
+		mds.append("\u2022 %s %s(%s) %s\n\n\t%s\n" % [ret_type, mname, get_args(attrib.args), attrib.qualifiers, attrib.description])
+	return [ms.join("\n"), mds.join("\n")]
 
 
 func get_default_property_value(item: Dictionary):

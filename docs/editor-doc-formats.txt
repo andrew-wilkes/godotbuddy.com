@@ -1,0 +1,35 @@
+Class: Button
+Inherits: BaseButton < Control < CanvasItem < Node < Object
+Inherited by: CheckBox , CheckButton , ColorPickerButton , MenuButton , OptionButton , ToolButton
+
+
+Methods
+void	find(what: Variant, from: int = -1)
+
+Method Descriptions
+
+● Array Array(from: PoolColorArray)
+
+	Constructs an array from a PoolColorArray.
+
+Properties
+bool	expand_icon [default: false]
+
+Theme Properties
+Color	font_color_hover [default: Color( 0.94, 0.94, 0.94, 1 )]  Text Color used when the Button is being hovered
+
+Enumerations
+enum  TextAlign:
+	● ALIGN_LEFT = 0  –  Align the text to the left.
+
+Property Descriptions
+● String text [default: ""]
+	set_text(value) setter
+	get_text() getter
+
+The button's text that will be displayed inside the button's area.
+
+Constants
+● PI = 3.141593  –  Constant that represents how many times the diameter of a circle fits around its perimeter.
+
+
