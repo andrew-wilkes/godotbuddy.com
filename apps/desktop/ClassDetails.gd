@@ -44,6 +44,7 @@ func _ready():
 	#update_content("String")
 	update_content("BaseButton")
 	#update_content("Array")
+	#update_content("bool")
 
 
 func update_content(cname, new = true):
@@ -66,6 +67,7 @@ func update_content(cname, new = true):
 	desc.set_content(info.description)
 
 	# Set up tabs
+	anchors = {}
 	var remove = false
 	for tab in tabs.get_children():
 		if remove:
@@ -100,19 +102,21 @@ func add_items_to_tab(prop, tab: RichContent, items):
 	match prop:
 		"methods":
 			content.append("[table=2]")
-			var descriptions = []
+			var description_groups = []
 			for key in items.keys():
 				var mstrs = get_method_strings(key, items[key])
 				content.append(mstrs[0])
-				descriptions.append([key, mstrs[1]])
+				description_groups.append([key, mstrs[1]])
 			content.append("[/table]\n")
 			content.append("Method Descriptions\n")
 			line_number += 4
-			for d in descriptions:
-				add_anchor(tab, prop, d[0], line_number)
-				content.append(d[1])
-				line_number += d[1].split("\n").size()
-				pass
+			for description_group in description_groups:
+				var idx = 0
+				for d in description_group[1]:
+					add_anchor(tab, prop, "%s%d" % [description_group[0], idx], line_number)
+					content.append(d)
+					line_number += d.split("\n").size()
+					idx += 1
 		"properties":
 			content.append("[table=2]")
 			var descriptions = []
@@ -153,7 +157,7 @@ func add_items_to_tab(prop, tab: RichContent, items):
 				else: # Constant
 					add_anchor(tab, prop, args.name, line_number)
 					var code = "\u2022 " + args.name + " = " + args.value + " - " + item.description
-					content.append()
+					content.append(code)
 					line_number += code.split("\n").size()
 			for ename in enums.keys():
 				add_anchor(tab, prop, ename, line_number)
@@ -199,11 +203,13 @@ func get_property_strings(pname, attribs: Dictionary):
 func get_method_strings(mname, attribs):
 	var ms = PoolStringArray([])
 	var mds = PoolStringArray([])
+	var idx = 0
 	for attrib in attribs:
 		var ret_type = get_return_type_string(attrib.return_type)
-		ms.append("[cell][right]%s[/right]\t[/cell][cell][method %s](%s) %s[/cell]" % [ret_type, mname, get_args(attrib.args), attrib.qualifiers])
+		ms.append("[cell][right]%s[/right]\t[/cell][cell][method %s%d](%s) %s[/cell]" % [ret_type, mname, idx, get_args(attrib.args), attrib.qualifiers])
 		mds.append("\u2022 %s %s(%s) %s\n\n\t%s\n" % [ret_type, mname, get_args(attrib.args), attrib.qualifiers, attrib.description])
-	return [ms.join("\n"), mds.join("\n")]
+		idx += 1
+	return [ms.join("\n"), mds]
 
 
 func get_default_property_value(item: Dictionary):
