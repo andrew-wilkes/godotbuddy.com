@@ -18,6 +18,7 @@ var tab_list = [
 	"tutorials",
 	"theme_items",
 ]
+var current_tab_list = []
 var tabs
 var anchors = {} 
 var anchor_map = {
@@ -42,9 +43,10 @@ func _ready():
 	#update_content("CollisionObject2D")
 	#update_content("File")
 	#update_content("String")
-	update_content("BaseButton")
+	#update_content("BaseButton")
 	#update_content("Array")
 	#update_content("bool")
+	update_content("Vector2")
 
 
 func update_content(cname, new = true):
@@ -68,12 +70,16 @@ func update_content(cname, new = true):
 
 	# Set up tabs
 	anchors = {}
+	current_tab_list = []
 	var remove = false
 	for tab in tabs.get_children():
 		if remove:
 			# Avoid problem of duplicate names
 			tab.name = "x"
 			tab.queue_free()
+		else:
+			tab.scroll_to_line(0) # Reset 1st tab's scroll position
+			tabs.set_current_tab(0) # Switch to first tab
 		remove = true
 	var add = false
 	var tab = tabs.get_child(0)
@@ -82,6 +88,7 @@ func update_content(cname, new = true):
 			if add:
 				tab = tab.duplicate()
 				tabs.add_child(tab)
+			current_tab_list.append(key)
 			tab.name = key.capitalize()
 			add = true
 			add_items_to_tab(key, tab, info[key])
@@ -111,6 +118,9 @@ func add_items_to_tab(prop, tab: RichContent, items):
 			content.append("Method Descriptions\n")
 			line_number += 4
 			for description_group in description_groups:
+				# Add base method anchor point
+				add_anchor(tab, prop, "%s" % [description_group[0]], line_number)
+				# Add descriptions and idexed anchor points
 				var idx = 0
 				for d in description_group[1]:
 					add_anchor(tab, prop, "%s%d" % [description_group[0], idx], line_number)
@@ -403,7 +413,7 @@ func _on_meta_clicked(meta):
 		# goto tab and specific item
 		var tab_name = anchor_map[ url[0] ] # url[0] == "method" for example
 		var target = anchors[tab_name][ url[1] ] # url[1] == name of the method for example
-		tabs.set_current_tab(tab_list.find(tab_name))
+		tabs.set_current_tab(current_tab_list.find(tab_name))
 		$SC.scroll_vertical = 0
 		target.tab.scroll_to_line(target.line)
 	else:
