@@ -30,9 +30,10 @@ margin_bottom = 591.0
 
 [node name="VBox" type="VBoxContainer" parent="SC"]
 margin_right = 1006.0
-margin_bottom = 380.0
+margin_bottom = 582.0
 rect_min_size = Vector2( 720, 0 )
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="HBox" type="HBoxContainer" parent="SC/VBox"]
 margin_right = 1006.0
@@ -229,7 +230,8 @@ rect_min_size = Vector2( 0, 10 )
 [node name="TabContainer" type="TabContainer" parent="SC/VBox"]
 margin_top = 304.0
 margin_right = 1006.0
-margin_bottom = 380.0
+margin_bottom = 582.0
+size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
 tab_align = 0
 
@@ -240,6 +242,8 @@ margin_left = 4.0
 margin_top = 44.0
 margin_right = -4.0
 margin_bottom = -4.0
+size_flags_vertical = 3
+fit_content_height = false
 
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
 [connection signal="pressed" from="SC/VBox/HBox1/BackButton" to="." method="_on_BackButton_pressed"]

@@ -19,6 +19,14 @@ var tab_list = [
 	"theme_items",
 ]
 var tabs
+var anchors = {} 
+var anchor_map = {
+	"method": "methods",
+	"member": "properties",
+	"signal": "signals",
+	"constant": "constants",
+	"enum": "constants",
+}
 
 func _ready():
 	desc = find_node("Desc")
@@ -77,8 +85,18 @@ func update_content(cname, new = true):
 			add_items_to_tab(key, tab, info[key])
 
 
+func add_anchor(tab, tab_name, item_name, line_number):
+	if not anchors.has(tab_name):
+		anchors[tab_name] = {}
+	anchors[tab_name][item_name] = {
+		"tab": tab,
+		"line": line_number
+	}
+
+
 func add_items_to_tab(prop, tab: RichContent, items):
 	var content = PoolStringArray([])
+	var line_number = 0
 	match prop:
 		"methods":
 			content.append("[table=2]")
@@ -86,30 +104,42 @@ func add_items_to_tab(prop, tab: RichContent, items):
 			for key in items.keys():
 				var mstrs = get_method_strings(key, items[key])
 				content.append(mstrs[0])
-				descriptions.append(mstrs[1])
+				descriptions.append([key, mstrs[1]])
 			content.append("[/table]\n")
 			content.append("Method Descriptions\n")
+			line_number += 4
 			for d in descriptions:
-				content.append(d)
+				add_anchor(tab, prop, d[0], line_number)
+				content.append(d[1])
+				line_number += d[1].split("\n").size()
+				pass
 		"properties":
 			content.append("[table=2]")
 			var descriptions = []
 			for key in items.keys():
 				var pstrs = get_property_strings(key, items[key])
 				content.append(pstrs[0])
-				descriptions.append(pstrs[1])
+				descriptions.append([key, pstrs[1]])
 			content.append("[/table]\n")
 			content.append("Property Descriptions\n")
+			line_number += 4
 			for d in descriptions:
-				content.append(d)
+				add_anchor(tab, prop, d[0], line_number)
+				content.append(d[1])
+				line_number += d[1].split("\n").size()
 		"theme_items":
 			content.append("[table=2]")
 			for item in items:
+				add_anchor(tab, prop, item, line_number)
 				content.append(get_theme_item_string(item))
+				line_number += 1
 			content.append("[/table]")
 		"signals":
 			for item in items:
-				content.append(item.name + " (" + get_args(item.args) + ")\n[indent]" + item.description + "[/indent]\n")
+				add_anchor(tab, prop, item.name, line_number)
+				var code = item.name + "(" + get_args(item.args) + ")\n[indent]" + item.description + "[/indent]\n"
+				content.append(code)
+				line_number += code.split("\n").size()
 		"constants":
 			var enums = {}
 			for item in items:
@@ -121,8 +151,12 @@ func add_items_to_tab(prop, tab: RichContent, items):
 					else:
 						enums[args.enum] = [args]
 				else: # Constant
-					content.append("\u2022 " + args.name + " = " + args.value + " - " + item.description)
+					add_anchor(tab, prop, args.name, line_number)
+					var code = "\u2022 " + args.name + " = " + args.value + " - " + item.description
+					content.append()
+					line_number += code.split("\n").size()
 			for ename in enums.keys():
+				add_anchor(tab, prop, ename, line_number)
 				content.append("[code]enum[/code]\t" + ename)
 				var vals = {}
 				for item in enums[ename]:
@@ -130,7 +164,10 @@ func add_items_to_tab(prop, tab: RichContent, items):
 				var keys = vals.keys()
 				keys.sort()
 				for key in keys:
-					content.append("\t\u2022 " + vals[key].name + " = " + vals[key].value + " - " + vals[key].description + "\n")
+					add_anchor(tab, prop, vals[key].name, line_number)
+					var code = "\t\u2022 " + vals[key].name + " = " + vals[key].value + " - " + vals[key].description + "\n"
+					content.append(code)
+					line_number += code.split("\n").size()
 		"tutorials":
 			for link in items:
 				content.append("\t" + get_link_string(link))
@@ -149,12 +186,12 @@ func get_theme_item_string(attribs: Dictionary):
 
 
 func get_signal_string(sname, attribs):
-	return "[cell]%s (%s)[/cell]" % [sname, get_args(attribs.args)]
+	return "[cell][signal %s] (%s)[/cell]" % [sname, get_args(attribs.args)]
 
 
 func get_property_strings(pname, attribs: Dictionary):
 	var type = get_return_type_string(attribs.type)
-	var ps = "[cell][right]%s[/right]\t[/cell][cell]%s %s[/cell]" % [type, pname, get_default_property_value(attribs)]
+	var ps = "[cell][right]%s[/right]\t[/cell][cell][member %s] %s[/cell]" % [type, pname, get_default_property_value(attribs)]
 	var pds = "\u2022 %s %s %s\n\t%s setter\n\t%s getter\n" % [type, pname, get_default_property_value(attribs), attribs.setter, attribs.getter]
 	return [ps, pds]
 
@@ -164,7 +201,7 @@ func get_method_strings(mname, attribs):
 	var mds = PoolStringArray([])
 	for attrib in attribs:
 		var ret_type = get_return_type_string(attrib.return_type)
-		ms.append("[cell][right]%s[/right]\t[/cell][cell]%s(%s) %s[/cell]" % [ret_type, mname, get_args(attrib.args), attrib.qualifiers])
+		ms.append("[cell][right]%s[/right]\t[/cell][cell][method %s](%s) %s[/cell]" % [ret_type, mname, get_args(attrib.args), attrib.qualifiers])
 		mds.append("\u2022 %s %s(%s) %s\n\n\t%s\n" % [ret_type, mname, get_args(attrib.args), attrib.qualifiers, attrib.description])
 	return [ms.join("\n"), mds.join("\n")]
 
@@ -357,7 +394,12 @@ func _on_meta_clicked(meta):
 	if url[0].begins_with("http"):
 		var _e = OS.shell_open(str(meta))
 	elif url.size() == 2:
-		pass # goto tab and specific item
+		# goto tab and specific item
+		var tab_name = anchor_map[ url[0] ] # url[0] == "method" for example
+		var target = anchors[tab_name][ url[1] ] # url[1] == name of the method for example
+		tabs.set_current_tab(tab_list.find(tab_name))
+		$SC.scroll_vertical = 0
+		target.tab.scroll_to_line(target.line)
 	else:
 		update_content(meta)
 		$SC.scroll_vertical = 0
