@@ -71,6 +71,7 @@ func update_content(cname, new = true):
 	# Set up tabs
 	anchors = {}
 	current_tab_list = []
+	tabs.set_current_tab(0) # Switch to first tab
 	var remove = false
 	for tab in tabs.get_children():
 		if remove:
@@ -79,7 +80,6 @@ func update_content(cname, new = true):
 			tab.queue_free()
 		else:
 			tab.scroll_to_line(0) # Reset 1st tab's scroll position
-			tabs.set_current_tab(0) # Switch to first tab
 		remove = true
 	var add = false
 	var tab = tabs.get_child(0)

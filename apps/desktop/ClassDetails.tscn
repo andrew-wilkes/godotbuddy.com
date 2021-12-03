@@ -242,6 +242,7 @@ margin_left = 4.0
 margin_top = 44.0
 margin_right = -4.0
 margin_bottom = -4.0
+rect_min_size = Vector2( 0, 200 )
 size_flags_vertical = 3
 fit_content_height = false
 
