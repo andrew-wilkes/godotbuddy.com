@@ -92,7 +92,7 @@ size_flags_vertical = 3
 margin_top = 42.0
 margin_right = 1006.0
 margin_bottom = 70.0
-custom_constants/separation = 5
+custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -104,15 +104,30 @@ margin_bottom = 21.0
 text = "Inherits:"
 
 [node name="Inherits" parent="SC/VBox/Ih" instance=ExtResource( 5 )]
-margin_left = 59.0
+margin_left = 64.0
 margin_top = 0.0
+margin_right = 515.0
 margin_bottom = 28.0
+
+[node name="Sp" type="Control" parent="SC/VBox/Ih"]
+margin_left = 525.0
+margin_right = 976.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="SC/VBox/Ih"]
+margin_left = 986.0
+margin_right = 1006.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 28 )
+hint_tooltip = "Go to previous class"
+text = "<"
 
 [node name="Ihby" type="HBoxContainer" parent="SC/VBox"]
 margin_top = 74.0
 margin_right = 1006.0
 margin_bottom = 102.0
-custom_constants/separation = 5
+custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -124,7 +139,7 @@ margin_bottom = 21.0
 text = "Inherited by:"
 
 [node name="Inherited" parent="SC/VBox/Ihby" instance=ExtResource( 5 )]
-margin_left = 87.0
+margin_left = 92.0
 margin_top = 0.0
 margin_bottom = 28.0
 
@@ -149,15 +164,8 @@ text = "+"
 [node name="BDesc" parent="SC/VBox/HBox1" instance=ExtResource( 5 )]
 margin_left = 28.0
 margin_top = 0.0
-margin_right = 960.0
-margin_bottom = 28.0
-
-[node name="BackButton" type="Button" parent="SC/VBox/HBox1"]
-margin_left = 968.0
 margin_right = 988.0
 margin_bottom = 28.0
-hint_tooltip = "Go to previous class"
-text = "<"
 
 [node name="Sp" type="Control" parent="SC/VBox/HBox1"]
 margin_left = 996.0
@@ -287,9 +295,9 @@ size_flags_vertical = 3
 fit_content_height = false
 
 [connection signal="meta_clicked" from="SC/VBox/Ih/Inherits" to="." method="_on_meta_clicked"]
+[connection signal="pressed" from="SC/VBox/Ih/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/Ihby/Inherited" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
-[connection signal="pressed" from="SC/VBox/HBox1/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/DescBox/HBox/Desc" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/VBox/HBox2/NotesButton" to="." method="_on_NotesButton_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/TabContainer/Methods" to="." method="_on_meta_clicked"]

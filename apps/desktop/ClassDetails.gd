@@ -44,39 +44,38 @@ func _ready():
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
-	#update_content("CollisionObject2D")
-	#update_content("File")
-	#update_content("String")
-	update_content("BaseButton")
-	#update_content("Array")
-	#update_content("bool")
-	#update_content("Vector2")
+	if get_parent().name == "root":
+		update_content("Object")
 
 
 func set_chain_text(rtl, txt):
 	if txt.length() > 0:
+		rtl.show()
 		rtl.bbcode_text = rtl.add_links(txt)
 		rtl.get_parent().get_child(0).show()
 	else:
 		rtl.bbcode_text = txt
 		rtl.get_parent().get_child(0).hide()
+		rtl.hide()
 
 
 func update_content(cname, new = true):
-	set_chain_text(ih, Data.get_inheritance_chain(cname))
-	set_chain_text(ihby, Data.get_inheritor_chain(cname))
 	if new:
-		if stepping_back:
-			history.clear()
-			stepping_back = false
-		set_back_button_state()
+		stepping_back = false
 		history.append(cname)
+		if history.size() > 1:
+			back_button.disabled = false
 	else:
 		if not stepping_back:
 			stepping_back = true
-			# Get the previous cname
-			cname = history.pop_back()
-		set_back_button_state()
+			# Get previous value but preserve the first item
+			cname = history[0]
+			if history.size() > 1:
+				cname = history.pop_back()
+	#print(history)
+	
+	set_chain_text(ih, Data.get_inheritance_chain(cname))
+	set_chain_text(ihby, Data.get_inheritor_chain(cname))
 
 	var info = get_info(cname)
 	find_node("ClassName").text = cname
@@ -173,7 +172,7 @@ func add_items_to_tab(prop, tab: RichContent, items):
 			var enums = {}
 			for item in items:
 				var args = item.args[0]
-				args.description = item.description
+				args.description = item.get("description", "")
 				if args.has("enum"):
 					if enums.has(args.enum):
 						enums[args.enum].append(args)
@@ -267,12 +266,8 @@ func get_default_arg_value(arg: Dictionary):
 		return ""
 
 
-func set_back_button_state():
-	back_button.disabled = true if history.size() < 1 else false
-
-
 func get_info(cname) -> Dictionary:
-	var info = {}
+	var info = { "brief_description": "", "description": "" }
 	var node_name = ""
 	var group_name = ""
 	var member_name = ""
@@ -448,4 +443,10 @@ func _on_NotesButton_pressed():
 
 
 func _on_BackButton_pressed():
-	update_content(history.pop_back(), false)
+	# Preserve the first item
+	var cname = history[0]
+	if history.size() > 1:
+		cname = history.pop_back()
+	else:
+		back_button.disabled = true
+	update_content(cname, false)
