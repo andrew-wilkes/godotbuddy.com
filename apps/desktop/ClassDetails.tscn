@@ -88,16 +88,56 @@ margin_right = 300.0
 margin_bottom = 38.0
 size_flags_vertical = 3
 
-[node name="Sp1" type="Control" parent="SC/VBox"]
+[node name="Ih" type="HBoxContainer" parent="SC/VBox"]
 margin_top = 42.0
 margin_right = 1006.0
-margin_bottom = 52.0
+margin_bottom = 70.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SC/VBox/Ih"]
+margin_top = 7.0
+margin_right = 54.0
+margin_bottom = 21.0
+text = "Inherits:"
+
+[node name="Inherits" parent="SC/VBox/Ih" instance=ExtResource( 5 )]
+margin_left = 59.0
+margin_top = 0.0
+margin_bottom = 28.0
+
+[node name="Ihby" type="HBoxContainer" parent="SC/VBox"]
+margin_top = 74.0
+margin_right = 1006.0
+margin_bottom = 102.0
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SC/VBox/Ihby"]
+margin_top = 7.0
+margin_right = 82.0
+margin_bottom = 21.0
+text = "Inherited by:"
+
+[node name="Inherited" parent="SC/VBox/Ihby" instance=ExtResource( 5 )]
+margin_left = 87.0
+margin_top = 0.0
+margin_bottom = 28.0
+
+[node name="Sp1" type="Control" parent="SC/VBox"]
+margin_top = 106.0
+margin_right = 1006.0
+margin_bottom = 116.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox1" type="HBoxContainer" parent="SC/VBox"]
-margin_top = 56.0
+margin_top = 120.0
 margin_right = 1006.0
-margin_bottom = 84.0
+margin_bottom = 148.0
 custom_constants/separation = 8
 
 [node name="DescButton" type="Button" parent="SC/VBox/HBox1"]
@@ -126,15 +166,15 @@ margin_bottom = 28.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="Sp2" type="Control" parent="SC/VBox"]
-margin_top = 88.0
+margin_top = 152.0
 margin_right = 1006.0
-margin_bottom = 98.0
+margin_bottom = 162.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="DescBox" type="VBoxContainer" parent="SC/VBox"]
-margin_top = 102.0
+margin_top = 166.0
 margin_right = 1006.0
-margin_bottom = 144.0
+margin_bottom = 208.0
 size_flags_horizontal = 3
 
 [node name="HBox" type="HBoxContainer" parent="SC/VBox/DescBox"]
@@ -159,9 +199,9 @@ margin_bottom = 42.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox2" type="HBoxContainer" parent="SC/VBox"]
-margin_top = 148.0
+margin_top = 212.0
 margin_right = 1006.0
-margin_bottom = 168.0
+margin_bottom = 232.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
@@ -187,15 +227,15 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="Sp3" type="Control" parent="SC/VBox"]
-margin_top = 172.0
+margin_top = 236.0
 margin_right = 1006.0
-margin_bottom = 182.0
+margin_bottom = 246.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="NotesBox" type="VBoxContainer" parent="SC/VBox"]
-margin_top = 186.0
+margin_top = 250.0
 margin_right = 1006.0
-margin_bottom = 300.0
+margin_bottom = 364.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -228,9 +268,9 @@ margin_bottom = 114.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="TabContainer" type="TabContainer" parent="SC/VBox"]
-margin_top = 304.0
+margin_top = 368.0
 margin_right = 1006.0
-margin_bottom = 582.0
+margin_bottom = 616.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
 tab_align = 0
@@ -246,6 +286,8 @@ rect_min_size = Vector2( 0, 200 )
 size_flags_vertical = 3
 fit_content_height = false
 
+[connection signal="meta_clicked" from="SC/VBox/Ih/Inherits" to="." method="_on_meta_clicked"]
+[connection signal="meta_clicked" from="SC/VBox/Ihby/Inherited" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
 [connection signal="pressed" from="SC/VBox/HBox1/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/DescBox/HBox/Desc" to="." method="_on_meta_clicked"]

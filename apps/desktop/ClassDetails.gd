@@ -7,6 +7,8 @@ var descbox
 var notes
 var desc_button
 var notes_button
+var ih
+var ihby
 var history = []
 var stepping_back = false
 var back_button
@@ -37,19 +39,32 @@ func _ready():
 	notes_button = find_node("NotesButton")
 	back_button = find_node("BackButton")
 	tabs = find_node("TabContainer")
+	ih = find_node("Inherits")
+	ihby = find_node("Inherited")
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
 	#update_content("CollisionObject2D")
 	#update_content("File")
 	#update_content("String")
-	#update_content("BaseButton")
+	update_content("BaseButton")
 	#update_content("Array")
 	#update_content("bool")
-	update_content("Vector2")
+	#update_content("Vector2")
+
+
+func set_chain_text(rtl, txt):
+	if txt.length() > 0:
+		rtl.bbcode_text = rtl.add_links(txt)
+		rtl.get_parent().get_child(0).show()
+	else:
+		rtl.bbcode_text = txt
+		rtl.get_parent().get_child(0).hide()
 
 
 func update_content(cname, new = true):
+	set_chain_text(ih, Data.get_inheritance_chain(cname))
+	set_chain_text(ihby, Data.get_inheritor_chain(cname))
 	if new:
 		if stepping_back:
 			history.clear()

@@ -6,18 +6,61 @@ const SETTINGS_FILE_NAME = "user://settings.res"
 var classes = {}
 var settings: Settings
 var settings_changed = false
+var regex
+var class_tree = {}
 
 func _ready():
 	load_classes()
 	settings = load_settings()
+	regex = RegEx.new()
+	regex.compile('inherits="(\\w+)"')
+	var keys = classes.keys()
+	keys.sort()
 	if settings.class_list.empty():
 		settings_changed = true
-		var keys = Data.classes.keys()
-		keys.sort()
 		for key in keys:
 			var class_item = ClassItem.new()
 			class_item.keyword = key
 			settings.class_list.append(class_item)
+	for key in keys:
+		class_tree[key] = [get_inherited_class(classes[key])]
+	# Add 'inherited by' keys
+	for key in keys:
+		var cname = class_tree[key][0]
+		if cname.length() > 0:
+			class_tree[cname].append(key)
+
+
+func get_inherited_class(xml: PoolByteArray):
+	var cname = ""
+	var s = xml.get_string_from_ascii()
+	var result = regex.search(s)
+	if result:
+		cname = result.get_string(1)
+	return cname
+
+
+func get_inheritance_chain(cname):
+	var chain = PoolStringArray([])
+	chain = get_ancestor(cname, chain)
+	return chain.join(" < ")
+
+
+func get_ancestor(cname: String, chain: PoolStringArray):
+	var cn = class_tree[cname][0]
+	if cn.length() > 0:
+		chain.append("[" + cn + "]")
+		chain = get_ancestor(cn, chain)
+	return chain
+
+
+func get_inheritor_chain(cname):
+	var chain = PoolStringArray([])
+	var nodes: Array = class_tree[cname]
+	if nodes.size() > 1:
+		for idx in range(1, nodes.size()):
+			chain.append("[" + nodes[idx] + "]")
+	return chain.join(" , ")
 
 
 # Add class info to dictionary
