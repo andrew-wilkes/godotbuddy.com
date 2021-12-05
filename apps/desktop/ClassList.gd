@@ -88,3 +88,7 @@ func get_brief_description(key):
 	if not item_desc.has(key):
 		item_desc[key] = Data.classes[key].get_string_from_ascii().split("brief_description")[1].split("\n")[1].dedent().replace("[", "").replace("]", "")
 	return item_desc[key]
+
+
+func _on_Menu_pressed():
+	var _e = get_tree().change_scene("res://Main.tscn")

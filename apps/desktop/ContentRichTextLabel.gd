@@ -6,6 +6,7 @@ export(Color) var code_color = Color(255, 155, 0)
 
 func set_content(txt: String):
 	txt = add_links(txt)
+	txt = convert_colors(txt)
 	bbcode_text = txt.c_unescape() \
 	.replace("codeblock]", "code]") \
 	.replace("[code]", "[code][color=#" + code_color.to_html(false) + "]") \
@@ -25,4 +26,19 @@ func add_links(txt: String):
 		var link = "[url=%s]%s[/url]" % [url, link_text]
 		var target = result.get_string(0)
 		txt = txt.replace(target, link)
+	return txt
+
+
+func convert_colors(txt: String):
+	# Color( 0.6, 0.8, 0.2, 1 ) > [color=#ffffff]Color( 0.6, 0.8, 0.2, 1 )[/color]
+	var regex = RegEx.new()
+	regex.compile("Color\\(([0-9\\., ]+?)\\)")
+	for result in regex.search_all(txt):
+		var col_code = result.get_string(0)
+		var rgb_code = result.get_string(1)
+		if rgb_code.length() > 0:
+			var rgb = rgb_code.split(", ")
+			if rgb.size() > 2:
+				print(rgb)
+				pass
 	return txt

@@ -30,7 +30,7 @@ margin_bottom = 591.0
 
 [node name="VBox" type="VBoxContainer" parent="SC"]
 margin_right = 994.0
-margin_bottom = 616.0
+margin_bottom = 630.0
 rect_min_size = Vector2( 720, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -58,13 +58,13 @@ text = "Button"
 
 [node name="Sp1" type="Control" parent="SC/VBox/HBox"]
 margin_left = 171.0
-margin_right = 684.0
+margin_right = 556.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 
 [node name="VBox" type="VBoxContainer" parent="SC/VBox/HBox"]
-margin_left = 694.0
-margin_right = 994.0
+margin_left = 566.0
+margin_right = 866.0
 margin_bottom = 38.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -88,10 +88,28 @@ margin_right = 300.0
 margin_bottom = 38.0
 size_flags_vertical = 3
 
-[node name="Ih" type="HBoxContainer" parent="SC/VBox"]
+[node name="Menu" type="Button" parent="SC/VBox/HBox"]
+margin_left = 876.0
+margin_right = 924.0
+margin_bottom = 38.0
+text = "Menu"
+
+[node name="Classes" type="Button" parent="SC/VBox/HBox"]
+margin_left = 934.0
+margin_right = 994.0
+margin_bottom = 38.0
+text = "Classes"
+
+[node name="Sp1" type="Control" parent="SC/VBox"]
 margin_top = 42.0
 margin_right = 994.0
-margin_bottom = 70.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="Ih" type="HBoxContainer" parent="SC/VBox"]
+margin_top = 56.0
+margin_right = 994.0
+margin_bottom = 84.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -124,9 +142,9 @@ hint_tooltip = "Go to previous class"
 text = "<"
 
 [node name="Ihby" type="HBoxContainer" parent="SC/VBox"]
-margin_top = 74.0
+margin_top = 88.0
 margin_right = 994.0
-margin_bottom = 102.0
+margin_bottom = 116.0
 custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
@@ -144,16 +162,16 @@ margin_top = 0.0
 margin_right = 994.0
 margin_bottom = 28.0
 
-[node name="Sp1" type="Control" parent="SC/VBox"]
-margin_top = 106.0
+[node name="Sp4" type="Control" parent="SC/VBox"]
+margin_top = 120.0
 margin_right = 994.0
-margin_bottom = 116.0
+margin_bottom = 130.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox1" type="HBoxContainer" parent="SC/VBox"]
-margin_top = 120.0
+margin_top = 134.0
 margin_right = 994.0
-margin_bottom = 148.0
+margin_bottom = 162.0
 custom_constants/separation = 8
 
 [node name="DescButton" type="Button" parent="SC/VBox/HBox1"]
@@ -175,15 +193,15 @@ margin_bottom = 28.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="Sp2" type="Control" parent="SC/VBox"]
-margin_top = 152.0
+margin_top = 166.0
 margin_right = 994.0
-margin_bottom = 162.0
+margin_bottom = 176.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="DescBox" type="VBoxContainer" parent="SC/VBox"]
-margin_top = 166.0
+margin_top = 180.0
 margin_right = 994.0
-margin_bottom = 208.0
+margin_bottom = 222.0
 size_flags_horizontal = 3
 
 [node name="HBox" type="HBoxContainer" parent="SC/VBox/DescBox"]
@@ -208,9 +226,9 @@ margin_bottom = 42.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox2" type="HBoxContainer" parent="SC/VBox"]
-margin_top = 212.0
+margin_top = 226.0
 margin_right = 994.0
-margin_bottom = 232.0
+margin_bottom = 246.0
 custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
@@ -236,15 +254,15 @@ margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="Sp3" type="Control" parent="SC/VBox"]
-margin_top = 236.0
+margin_top = 250.0
 margin_right = 994.0
-margin_bottom = 246.0
+margin_bottom = 260.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="NotesBox" type="VBoxContainer" parent="SC/VBox"]
-margin_top = 250.0
+margin_top = 264.0
 margin_right = 994.0
-margin_bottom = 364.0
+margin_bottom = 378.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -277,9 +295,9 @@ margin_bottom = 114.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="TabContainer" type="TabContainer" parent="SC/VBox"]
-margin_top = 368.0
+margin_top = 382.0
 margin_right = 994.0
-margin_bottom = 616.0
+margin_bottom = 630.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
 tab_align = 0
@@ -296,6 +314,8 @@ size_flags_vertical = 3
 fit_content_height = false
 
 [connection signal="value_changed" from="SC/VBox/HBox/VBox/HSlider" to="." method="_on_HSlider_value_changed"]
+[connection signal="pressed" from="SC/VBox/HBox/Menu" to="." method="_on_Menu_pressed"]
+[connection signal="pressed" from="SC/VBox/HBox/Classes" to="." method="_on_Classes_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/Ih/Inherits" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/VBox/Ih/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/Ihby/Inherited" to="." method="_on_meta_clicked"]

@@ -474,3 +474,11 @@ func _on_HSlider_value_changed(value):
 func _on_Notes_text_changed():
 	current_class.notes = notes.text
 	Data.settings_changed = true
+
+
+func _on_Menu_pressed():
+	var _e = get_tree().change_scene("res://Main.tscn")
+
+
+func _on_Classes_pressed():
+	var _e = get_tree().change_scene("res://ClassList.tscn")

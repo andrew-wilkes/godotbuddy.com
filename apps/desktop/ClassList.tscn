@@ -1,31 +1,69 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ClassList.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/boldheader.tres" type="DynamicFont" id=2]
 
-[node name="ClassList" type="Control"]
+[node name="ClassList" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/margin_right = 9
+custom_constants/margin_top = 9
+custom_constants/margin_left = 9
+custom_constants/margin_bottom = 9
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBox" type="VBoxContainer" parent="."]
-margin_right = 123.0
-margin_bottom = 357.0
+margin_left = 9.0
+margin_top = 9.0
+margin_right = 1015.0
+margin_bottom = 591.0
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+margin_right = 1006.0
+margin_bottom = 34.0
+
+[node name="Label" type="Label" parent="VBox/HBox"]
+margin_right = 167.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 2 )
+text = "Class Explorer"
+
+[node name="sp" type="Control" parent="VBox/HBox"]
+margin_left = 171.0
+margin_right = 954.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+
+[node name="Menu" type="Button" parent="VBox/HBox"]
+margin_left = 958.0
+margin_right = 1006.0
+margin_bottom = 34.0
+text = "Menu"
+
+[node name="sp" type="Control" parent="VBox"]
+margin_top = 38.0
+margin_right = 1006.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 10 )
+
 [node name="SS" type="LineEdit" parent="VBox"]
-margin_right = 123.0
-margin_bottom = 24.0
+margin_top = 52.0
+margin_right = 1006.0
+margin_bottom = 76.0
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="C" type="ScrollContainer" parent="VBox"]
-margin_top = 28.0
-margin_right = 123.0
-margin_bottom = 357.0
-size_flags_horizontal = 3
+margin_top = 80.0
+margin_right = 1006.0
+margin_bottom = 582.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 __meta__ = {
@@ -52,4 +90,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="pressed" from="VBox/HBox/Menu" to="." method="_on_Menu_pressed"]
 [connection signal="text_changed" from="VBox/SS" to="." method="_on_SS_text_changed"]
