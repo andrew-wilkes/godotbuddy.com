@@ -32,6 +32,7 @@ margin_bottom = 591.0
 margin_right = 994.0
 margin_bottom = 630.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="VBox" type="VBoxContainer" parent="SC/H"]
