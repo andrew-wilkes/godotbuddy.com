@@ -9,6 +9,7 @@ var settings_changed = false
 var regex
 var class_tree = {}
 var class_list_key_map = {}
+var selected_class = ""
 
 func _ready():
 	load_classes()

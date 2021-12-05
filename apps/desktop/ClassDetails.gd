@@ -30,8 +30,8 @@ var anchor_map = {
 	"constant": "constants",
 	"enum": "constants",
 }
-var current_class: ClassItem
 var weight
+var current_class: ClassItem
 
 func _ready():
 	desc = find_node("Desc")
@@ -47,8 +47,10 @@ func _ready():
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
-	if get_parent().name == "root":
+	if Data.selected_class == "":
 		update_content("Object")
+	else:
+		update_content(Data.selected_class)
 
 
 func set_chain_text(rtl, txt):
@@ -77,7 +79,7 @@ func update_content(cname, new = true):
 				cname = history.pop_back()
 	#print(history)
 	current_class = Data.get_user_class(cname)
-	
+
 	set_chain_text(ih, Data.get_inheritance_chain(cname))
 	set_chain_text(ihby, Data.get_inheritor_chain(cname))
 
@@ -86,6 +88,7 @@ func update_content(cname, new = true):
 	find_node("BDesc").set_content(info.brief_description)
 	desc.set_content(info.description)
 	weight.value = current_class.weight
+	weight.hint_tooltip = String(int(weight.value))
 	notes.text = current_class.notes
 	set_notes_visibility(notes.text.length() > 0)
 
@@ -187,7 +190,7 @@ func add_items_to_tab(prop, tab: RichContent, items):
 						enums[args.enum] = [args]
 				else: # Constant
 					add_anchor(tab, prop, args.name, line_number)
-					var code = "\u2022 " + args.name + " = " + args.value + " - " + item.description
+					var code = "\u2022 " + args.name + " = " + args.value + " - " + item.get("description", "")
 					content.append(code)
 					line_number += code.split("\n").size()
 			for ename in enums.keys():
@@ -464,6 +467,7 @@ func _on_BackButton_pressed():
 
 func _on_HSlider_value_changed(value):
 	current_class.weight = value
+	weight.hint_tooltip = String(int(value))
 	Data.settings_changed = true
 
 

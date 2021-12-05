@@ -4,6 +4,7 @@ var list: VBoxContainer
 var list_button = preload("res://ListButton.tscn")
 var button_color: Color
 var item_desc = {}
+var class_details_scene = preload("res://ClassDetails.tscn")
 
 func _ready():
 	list = $VBox/C/M/VBox
@@ -29,6 +30,8 @@ func item_pressed(button):
 			class_item.weight += 1
 			Data.settings_changed = true
 			break
+	Data.selected_class = button.text
+	var _e = get_tree().change_scene("res://ClassDetails.tscn")
 	update_labels()
 
 
