@@ -30,6 +30,8 @@ var anchor_map = {
 	"constant": "constants",
 	"enum": "constants",
 }
+var current_class: ClassItem
+var weight
 
 func _ready():
 	desc = find_node("Desc")
@@ -41,6 +43,7 @@ func _ready():
 	tabs = find_node("TabContainer")
 	ih = find_node("Inherits")
 	ihby = find_node("Inherited")
+	weight = find_node("HSlider")
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
@@ -73,6 +76,7 @@ func update_content(cname, new = true):
 			if history.size() > 1:
 				cname = history.pop_back()
 	#print(history)
+	current_class = Data.get_user_class(cname)
 	
 	set_chain_text(ih, Data.get_inheritance_chain(cname))
 	set_chain_text(ihby, Data.get_inheritor_chain(cname))
@@ -81,6 +85,7 @@ func update_content(cname, new = true):
 	find_node("ClassName").text = cname
 	find_node("BDesc").set_content(info.brief_description)
 	desc.set_content(info.description)
+	weight.value = current_class.weight
 
 	# Set up tabs
 	anchors = {}
@@ -450,3 +455,8 @@ func _on_BackButton_pressed():
 	else:
 		back_button.disabled = true
 	update_content(cname, false)
+
+
+func _on_HSlider_value_changed(value):
+	current_class.weight = value
+	Data.settings_changed = true

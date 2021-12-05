@@ -8,6 +8,7 @@ var settings: Settings
 var settings_changed = false
 var regex
 var class_tree = {}
+var class_list_key_map = {}
 
 func _ready():
 	load_classes()
@@ -16,12 +17,27 @@ func _ready():
 	regex.compile('inherits="(\\w+)"')
 	var keys = classes.keys()
 	keys.sort()
+	var idx = 0
 	if settings.class_list.empty():
 		settings_changed = true
 		for key in keys:
 			var class_item = ClassItem.new()
 			class_item.keyword = key
 			settings.class_list.append(class_item)
+			class_list_key_map[key] = idx
+			idx += 1
+	else:
+		# Add any new classes to class_list
+		for cl_item in settings.class_list:
+			class_list_key_map[cl_item.keyword] = idx
+		idx += 1
+		for key in keys:
+			if not key in class_list_key_map.keys():
+				var class_item = ClassItem.new()
+				class_item.keyword = key
+				settings.class_list.append(class_item)
+				class_list_key_map[key] = idx
+				idx += 1
 	for key in keys:
 		class_tree[key] = [get_inherited_class(classes[key])]
 	# Add 'inherited by' keys
@@ -29,6 +45,10 @@ func _ready():
 		var cname = class_tree[key][0]
 		if cname.length() > 0:
 			class_tree[cname].append(key)
+
+
+func get_user_class(cname):
+	return settings.class_list[class_list_key_map[cname]]
 
 
 func get_inherited_class(xml: PoolByteArray):

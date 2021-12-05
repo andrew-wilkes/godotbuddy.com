@@ -29,14 +29,14 @@ margin_right = 1015.0
 margin_bottom = 591.0
 
 [node name="VBox" type="VBoxContainer" parent="SC"]
-margin_right = 1006.0
-margin_bottom = 582.0
+margin_right = 994.0
+margin_bottom = 616.0
 rect_min_size = Vector2( 720, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBox" type="HBoxContainer" parent="SC/VBox"]
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 38.0
 custom_constants/separation = 10
 
@@ -58,13 +58,13 @@ text = "Button"
 
 [node name="Sp1" type="Control" parent="SC/VBox/HBox"]
 margin_left = 171.0
-margin_right = 696.0
+margin_right = 684.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 
 [node name="VBox" type="VBoxContainer" parent="SC/VBox/HBox"]
-margin_left = 706.0
-margin_right = 1006.0
+margin_left = 694.0
+margin_right = 994.0
 margin_bottom = 38.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -90,7 +90,7 @@ size_flags_vertical = 3
 
 [node name="Ih" type="HBoxContainer" parent="SC/VBox"]
 margin_top = 42.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 70.0
 custom_constants/separation = 10
 __meta__ = {
@@ -106,18 +106,18 @@ text = "Inherits:"
 [node name="Inherits" parent="SC/VBox/Ih" instance=ExtResource( 5 )]
 margin_left = 64.0
 margin_top = 0.0
-margin_right = 515.0
+margin_right = 509.0
 margin_bottom = 28.0
 
 [node name="Sp" type="Control" parent="SC/VBox/Ih"]
-margin_left = 525.0
-margin_right = 976.0
+margin_left = 519.0
+margin_right = 964.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="BackButton" type="Button" parent="SC/VBox/Ih"]
-margin_left = 986.0
-margin_right = 1006.0
+margin_left = 974.0
+margin_right = 994.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 0, 28 )
 hint_tooltip = "Go to previous class"
@@ -125,7 +125,7 @@ text = "<"
 
 [node name="Ihby" type="HBoxContainer" parent="SC/VBox"]
 margin_top = 74.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 102.0
 custom_constants/separation = 10
 __meta__ = {
@@ -141,17 +141,18 @@ text = "Inherited by:"
 [node name="Inherited" parent="SC/VBox/Ihby" instance=ExtResource( 5 )]
 margin_left = 92.0
 margin_top = 0.0
+margin_right = 994.0
 margin_bottom = 28.0
 
 [node name="Sp1" type="Control" parent="SC/VBox"]
 margin_top = 106.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 116.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox1" type="HBoxContainer" parent="SC/VBox"]
 margin_top = 120.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 148.0
 custom_constants/separation = 8
 
@@ -164,51 +165,51 @@ text = "+"
 [node name="BDesc" parent="SC/VBox/HBox1" instance=ExtResource( 5 )]
 margin_left = 28.0
 margin_top = 0.0
-margin_right = 988.0
+margin_right = 976.0
 margin_bottom = 28.0
 
 [node name="Sp" type="Control" parent="SC/VBox/HBox1"]
-margin_left = 996.0
-margin_right = 1006.0
+margin_left = 984.0
+margin_right = 994.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="Sp2" type="Control" parent="SC/VBox"]
 margin_top = 152.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 162.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="DescBox" type="VBoxContainer" parent="SC/VBox"]
 margin_top = 166.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 208.0
 size_flags_horizontal = 3
 
 [node name="HBox" type="HBoxContainer" parent="SC/VBox/DescBox"]
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 28.0
 
 [node name="Desc" parent="SC/VBox/DescBox/HBox" instance=ExtResource( 5 )]
 margin_top = 0.0
-margin_right = 982.0
+margin_right = 970.0
 margin_bottom = 28.0
 
 [node name="Sp" type="Control" parent="SC/VBox/DescBox/HBox"]
-margin_left = 986.0
-margin_right = 1006.0
+margin_left = 974.0
+margin_right = 994.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="Sp2" type="Control" parent="SC/VBox/DescBox"]
 margin_top = 32.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBox2" type="HBoxContainer" parent="SC/VBox"]
 margin_top = 212.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 232.0
 custom_constants/separation = 8
 __meta__ = {
@@ -230,30 +231,30 @@ text = "Notes"
 
 [node name="Sp" type="Control" parent="SC/VBox/HBox2"]
 margin_left = 74.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 
 [node name="Sp3" type="Control" parent="SC/VBox"]
 margin_top = 236.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 246.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="NotesBox" type="VBoxContainer" parent="SC/VBox"]
 margin_top = 250.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 364.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBox" type="HBoxContainer" parent="SC/VBox/NotesBox"]
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 100.0
 
 [node name="Notes" type="TextEdit" parent="SC/VBox/NotesBox/HBox"]
-margin_right = 982.0
+margin_right = 970.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
@@ -264,20 +265,20 @@ __meta__ = {
 }
 
 [node name="Sp" type="Control" parent="SC/VBox/NotesBox/HBox"]
-margin_left = 986.0
-margin_right = 1006.0
+margin_left = 974.0
+margin_right = 994.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="Sp4" type="Control" parent="SC/VBox/NotesBox"]
 margin_top = 104.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 114.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="TabContainer" type="TabContainer" parent="SC/VBox"]
 margin_top = 368.0
-margin_right = 1006.0
+margin_right = 994.0
 margin_bottom = 616.0
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )
@@ -294,6 +295,7 @@ rect_min_size = Vector2( 0, 200 )
 size_flags_vertical = 3
 fit_content_height = false
 
+[connection signal="value_changed" from="SC/VBox/HBox/VBox/HSlider" to="." method="_on_HSlider_value_changed"]
 [connection signal="meta_clicked" from="SC/VBox/Ih/Inherits" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/VBox/Ih/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/Ihby/Inherited" to="." method="_on_meta_clicked"]
