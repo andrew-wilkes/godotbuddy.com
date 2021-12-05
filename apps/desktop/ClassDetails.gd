@@ -86,6 +86,8 @@ func update_content(cname, new = true):
 	find_node("BDesc").set_content(info.brief_description)
 	desc.set_content(info.description)
 	weight.value = current_class.weight
+	notes.text = current_class.notes
+	set_notes_visibility(notes.text.length() > 0)
 
 	# Set up tabs
 	anchors = {}
@@ -442,9 +444,12 @@ func _on_Description_pressed():
 
 
 func _on_NotesButton_pressed():
-	var nb = notes.get_parent()
-	nb.visible = not nb.visible
-	notes_button.text = "-" if nb.visible else "+"
+	set_notes_visibility(not notes.get_parent().visible)
+
+
+func set_notes_visibility(_visible: bool):
+	notes.get_parent().visible = _visible
+	notes_button.text = "-" if _visible else "+"
 
 
 func _on_BackButton_pressed():
@@ -459,4 +464,9 @@ func _on_BackButton_pressed():
 
 func _on_HSlider_value_changed(value):
 	current_class.weight = value
+	Data.settings_changed = true
+
+
+func _on_Notes_text_changed():
+	current_class.notes = notes.text
 	Data.settings_changed = true

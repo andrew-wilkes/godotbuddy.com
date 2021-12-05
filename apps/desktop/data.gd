@@ -30,7 +30,7 @@ func _ready():
 		# Add any new classes to class_list
 		for cl_item in settings.class_list:
 			class_list_key_map[cl_item.keyword] = idx
-		idx += 1
+			idx += 1
 		for key in keys:
 			if not key in class_list_key_map.keys():
 				var class_item = ClassItem.new()

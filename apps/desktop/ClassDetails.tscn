@@ -302,4 +302,5 @@ fit_content_height = false
 [connection signal="pressed" from="SC/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
 [connection signal="meta_clicked" from="SC/VBox/DescBox/HBox/Desc" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/VBox/HBox2/NotesButton" to="." method="_on_NotesButton_pressed"]
+[connection signal="text_changed" from="SC/VBox/NotesBox/HBox/Notes" to="." method="_on_Notes_text_changed"]
 [connection signal="meta_clicked" from="SC/VBox/TabContainer/Methods" to="." method="_on_meta_clicked"]
