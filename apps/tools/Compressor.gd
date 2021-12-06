@@ -3,7 +3,7 @@
 extends Control
 
 const FOLDER = "/home/andrew/dev/websites/godotbuddy.com/data/godot-3.4/doc/classes/"
-const DATA_FILE = "res://classes.dat"
+const DATA_FILE = "../desktop/classes.dat"
 
 var class_info = {}
 

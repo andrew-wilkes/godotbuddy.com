@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+
+[node name="Main" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 9
+custom_constants/margin_top = 9
+custom_constants/margin_left = 9
+custom_constants/margin_bottom = 9
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBox" type="HBoxContainer" parent="."]
+margin_left = 9.0
+margin_top = 9.0
+margin_right = 1015.0
+margin_bottom = 591.0
+custom_constants/separation = 20
+
+[node name="VBox" type="VBoxContainer" parent="HBox"]
+margin_right = 195.0
+margin_bottom = 582.0
+custom_constants/separation = 20
+
+[node name="ClassList" type="Button" parent="HBox/VBox"]
+margin_right = 195.0
+margin_bottom = 20.0
+text = "Get list of classes"
+
+[node name="NoBriefDescriptions" type="Button" parent="HBox/VBox"]
+margin_top = 40.0
+margin_right = 195.0
+margin_bottom = 60.0
+text = "List with no brief description"
+
+[node name="NoDescriptions" type="Button" parent="HBox/VBox"]
+margin_top = 80.0
+margin_right = 195.0
+margin_bottom = 100.0
+text = "List no main description"
+
+[node name="Methods" type="Button" parent="HBox/VBox"]
+margin_top = 120.0
+margin_right = 195.0
+margin_bottom = 140.0
+text = "Methods with no description"
+
+[node name="Tutorials" type="Button" parent="HBox/VBox"]
+margin_top = 160.0
+margin_right = 195.0
+margin_bottom = 180.0
+text = "No Tutorials"
+
+[node name="Links" type="Button" parent="HBox/VBox"]
+margin_top = 200.0
+margin_right = 195.0
+margin_bottom = 220.0
+text = "Links"
+
+[node name="TextBox" type="TextEdit" parent="HBox"]
+margin_left = 215.0
+margin_right = 1006.0
+margin_bottom = 582.0
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="HBox/VBox/ClassList" to="." method="_on_ClassList_pressed"]
+[connection signal="pressed" from="HBox/VBox/NoBriefDescriptions" to="." method="_on_NoBriefDescriptions_pressed"]
+[connection signal="pressed" from="HBox/VBox/NoDescriptions" to="." method="_on_NoDescriptions_pressed"]
+[connection signal="pressed" from="HBox/VBox/Methods" to="." method="_on_Methods_pressed"]
+[connection signal="pressed" from="HBox/VBox/Tutorials" to="." method="_on_Tutorials_pressed"]
+[connection signal="pressed" from="HBox/VBox/Links" to="." method="_on_Links_pressed"]
