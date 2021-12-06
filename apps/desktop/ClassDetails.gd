@@ -213,9 +213,12 @@ func add_items_to_tab(prop, tab: RichContent, items):
 
 
 func get_link_string(link):
+	var url = ""
 	if link.title == "":
 		link.title = link.url
-	return "[url=%s]%s[/url]" % [link.url, link.title]
+	else:
+		url = link.url
+	return "[url=%s]%s[/url] - %s" % [link.url, link.title, url]
 
 
 func get_theme_item_string(attribs: Dictionary):

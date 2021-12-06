@@ -6,14 +6,18 @@ wget https://nightly.link/godotengine/godot-docs/workflows/build_offline_docs/ma
 
 unzip -u godot-docs-html-master.zip -d /home/andrew/dev/websites/godotbuddy.com/data/godot-docs-html
 
-
 https://github.com/godotengine/godot/archive/refs/heads/3.4.zip
 
 3.4.zip  53.63M  8.44MB/s    in 7.3s    
 
 2021-11-22 14:47:56 (7.37 MB/s) - ‘3.4.zip’ saved [56239958]
 
+cd data
 unzip -u 3.4.zip "godot-3.4/doc/classes/*" -d /home/andrew/dev/websites/godotbuddy.com/data/3.4
+
+GDScript functions
+unzip -u 3.4.zip "godot-3.4/modules/gdscript/doc_classes/@GDScript.xml" -d /home/andrew/dev/websites/godotbuddy.com/data/3.4
+mv 3.4/godot-3.4/modules/gdscript/doc_classes/* godot-3.4/doc/classes/
 
 Check size of folder.
 
@@ -24,8 +28,4 @@ zip -r classes.zip godot-3.4
 
 884K 11月 22 18:19 classes.zip
 
-**** ToDos
-
-Settings resource
-Scene to list classes and arrange in order
-Create a scene to display class info.
+Source code: https://github.com/godotengine/godot/tree/3.4
