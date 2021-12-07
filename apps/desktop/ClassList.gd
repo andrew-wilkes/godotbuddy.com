@@ -5,16 +5,29 @@ var list_button = preload("res://ListButton.tscn")
 var button_color: Color
 var item_desc = {}
 var class_details_scene = preload("res://ClassDetails.tscn")
+var grid
+var b_container
 
 func _ready():
-	list = $VBox/C/M/VBox
+	grid = $VBox/BC/Grid
+	b_container = $VBox/BC
 	for class_item in Data.settings.class_list:
 		var button = list_button.instance()
-		list.add_child(button)
+		grid.add_child(button)
 		button.connect("pressed", self, "item_pressed", [button])
-	button_color = list.get_child(0).modulate
+	button_color = grid.get_child(0).modulate
 	update_labels()
 	clear_search_box()
+	grid.columns = 1
+	call_deferred("arrange_controls")
+
+
+func arrange_controls():
+	var w_size = OS.window_size.x
+	var b_size = grid.get_child(0).rect_size.x
+	var n_cols = int(floor(w_size / b_size))
+	if n_cols != grid.columns:
+		grid.columns = n_cols
 
 
 func clear_search_box():
@@ -24,7 +37,7 @@ func clear_search_box():
 
 func item_pressed(button):
 	clear_search_box()
-	$VBox/C.scroll_vertical = 0
+	$VBox/BC.scroll_vertical = 0
 	for class_item in Data.settings.class_list:
 		if class_item.keyword == button.text:
 			class_item.weight += 1
@@ -52,7 +65,7 @@ func update_labels():
 	for weight in weights:
 		for item in weighted_items: # Find first item with this weight
 			if item.weight == weight:
-				var button: Button = list.get_child(i)
+				var button: Button = grid.get_child(i)
 				button.text = item.keyword
 				button.hint_tooltip = get_brief_description(item.keyword)
 				button.modulate = button_color.lightened(0.2)
@@ -60,12 +73,12 @@ func update_labels():
 				break
 		i += 1
 	for item in unweighted_items:
-		var button: Button = list.get_child(i)
+		var button: Button = grid.get_child(i)
 		button.text = item.keyword
 		button.hint_tooltip = get_brief_description(item.keyword)
 		button.modulate = button_color
 		i += 1
-	for item in list.get_children():
+	for item in grid.get_children():
 		item.visible = true
 
 
@@ -74,14 +87,14 @@ func _on_SS_text_changed(new_text: String):
 	if new_text.length() > 1:
 		# Find close matches
 		var idx = 0
-		for item in list.get_children():
+		for item in grid.get_children():
 			if new_text.to_lower() in item.text.to_lower():
 				matches.append(idx)
 			idx += 1
 	# Make all visible or just those matched
-	for i in list.get_child_count():
+	for i in grid.get_child_count():
 		var vis = true if matches.size() == 0 else i in matches
-		list.get_child(i).visible = vis
+		grid.get_child(i).visible = vis
 
 
 func get_brief_description(key):
@@ -92,3 +105,14 @@ func get_brief_description(key):
 
 func _on_Menu_pressed():
 	var _e = get_tree().change_scene("res://Main.tscn")
+
+
+func _on_ClassList_resized():
+	if grid:
+		grid.columns = 1
+		if $Timer.is_stopped():
+			$Timer.start(0.5)
+
+
+func _on_Timer_timeout():
+	call_deferred("arrange_controls")

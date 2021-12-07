@@ -323,6 +323,7 @@ rect_min_size = Vector2( 10, 0 )
 [connection signal="pressed" from="SC/H/VBox/Ih/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="meta_clicked" from="SC/H/VBox/Ihby/Inherited" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/H/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
+[connection signal="meta_clicked" from="SC/H/VBox/HBox1/BDesc" to="." method="_on_meta_clicked"]
 [connection signal="meta_clicked" from="SC/H/VBox/DescBox/HBox/Desc" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/H/VBox/HBox2/NotesButton" to="." method="_on_NotesButton_pressed"]
 [connection signal="text_changed" from="SC/H/VBox/NotesBox/Notes" to="." method="_on_Notes_text_changed"]
