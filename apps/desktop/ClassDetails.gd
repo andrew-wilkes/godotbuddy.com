@@ -9,6 +9,7 @@ var desc_button
 var notes_button
 var ih
 var ihby
+var bdescbox
 var history = []
 var stepping_back = false
 var back_button
@@ -44,6 +45,7 @@ func _ready():
 	ih = find_node("Inherits")
 	ihby = find_node("Inherited")
 	weight = find_node("HSlider")
+	bdescbox = find_node("BDescBox")
 	back_button.disabled = true
 	descbox.hide()
 	notes.get_parent().hide()
@@ -85,8 +87,12 @@ func update_content(cname, new = true):
 
 	var info = get_info(cname)
 	find_node("ClassName").text = cname
-	find_node("BDesc").set_content(info.brief_description)
-	desc.set_content(info.description)
+	if info.brief_description.length() > 0:
+		bdescbox.show()
+		find_node("BDesc").set_content(info.brief_description)
+		desc.set_content(info.description)
+	else:
+		bdescbox.hide()
 	weight.value = current_class.weight
 	weight.hint_tooltip = String(int(weight.value))
 	notes.text = current_class.notes
@@ -457,6 +463,7 @@ func _on_Description_pressed():
 
 func _on_NotesButton_pressed():
 	set_notes_visibility(not notes.get_parent().visible)
+	notes.grab_focus()
 
 
 func set_notes_visibility(_visible: bool):

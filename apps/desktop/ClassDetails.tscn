@@ -175,25 +175,25 @@ margin_right = 974.0
 margin_bottom = 130.0
 rect_min_size = Vector2( 0, 10 )
 
-[node name="HBox1" type="HBoxContainer" parent="SC/H/VBox"]
+[node name="BDescBox" type="HBoxContainer" parent="SC/H/VBox"]
 margin_top = 134.0
 margin_right = 974.0
 margin_bottom = 162.0
 custom_constants/separation = 8
 
-[node name="DescButton" type="Button" parent="SC/H/VBox/HBox1"]
+[node name="DescButton" type="Button" parent="SC/H/VBox/BDescBox"]
 margin_right = 20.0
 margin_bottom = 28.0
 hint_tooltip = "Detailed description"
 text = "+"
 
-[node name="BDesc" parent="SC/H/VBox/HBox1" instance=ExtResource( 5 )]
+[node name="BDesc" parent="SC/H/VBox/BDescBox" instance=ExtResource( 5 )]
 margin_left = 28.0
 margin_top = 0.0
 margin_right = 956.0
 margin_bottom = 28.0
 
-[node name="Sp" type="Control" parent="SC/H/VBox/HBox1"]
+[node name="Sp" type="Control" parent="SC/H/VBox/BDescBox"]
 margin_left = 964.0
 margin_right = 974.0
 margin_bottom = 28.0
@@ -322,8 +322,8 @@ rect_min_size = Vector2( 10, 0 )
 [connection signal="meta_clicked" from="SC/H/VBox/Ih/Inherits" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/H/VBox/Ih/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="meta_clicked" from="SC/H/VBox/Ihby/Inherited" to="." method="_on_meta_clicked"]
-[connection signal="pressed" from="SC/H/VBox/HBox1/DescButton" to="." method="_on_Description_pressed"]
-[connection signal="meta_clicked" from="SC/H/VBox/HBox1/BDesc" to="." method="_on_meta_clicked"]
+[connection signal="pressed" from="SC/H/VBox/BDescBox/DescButton" to="." method="_on_Description_pressed"]
+[connection signal="meta_clicked" from="SC/H/VBox/BDescBox/BDesc" to="." method="_on_meta_clicked"]
 [connection signal="meta_clicked" from="SC/H/VBox/DescBox/HBox/Desc" to="." method="_on_meta_clicked"]
 [connection signal="pressed" from="SC/H/VBox/HBox2/NotesButton" to="." method="_on_NotesButton_pressed"]
 [connection signal="text_changed" from="SC/H/VBox/NotesBox/Notes" to="." method="_on_Notes_text_changed"]
