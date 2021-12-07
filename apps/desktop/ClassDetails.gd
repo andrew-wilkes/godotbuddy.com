@@ -234,11 +234,11 @@ func get_property_strings(pname, attribs: Dictionary):
 	var type = get_return_type_string(attribs.type)
 	var ps = "[cell][right]%s[/right]\t[/cell][cell][member %s] %s[/cell]" % [type, pname, get_default_property_value(attribs)]
 	var pds = "\u2022 %s %s %s\n" % [type, pname, get_default_property_value(attribs)]
-	if attribs.setter.length() > 0:
+	if attribs.get("setter").length() > 0:
 		pds += "\t%s setter\n" % [attribs.setter]
-	if attribs.getter.length() > 0:
+	if attribs.get("getter").length() > 0:
 		pds += "\t%s getter\n\n" % [attribs.getter]
-	if attribs.description.length() > 0:
+	if attribs.get("description", "").length() > 0:
 		pds += "\t" + attribs.description + "\n"
 	return [ps, pds]
 
